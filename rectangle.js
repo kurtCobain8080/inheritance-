@@ -3,7 +3,7 @@
  */
 /**
  * draw a rectangle
- * @param {obj} {
+ * @param {Object} {
      * @param {CanvasRenderingContext2D} context - canvas context
      * @param {number} x
      * @param {number} y
@@ -13,7 +13,7 @@
      * @param {string} [border="#000"] - color code for border ( default 'black' )
      * @param {string} [background="#000"] - color code for background ( default 'black' )
  * }
- * @returns {obj} {
+ * @returns {this} {
      * @function {draw} context - canvas context
  * }
  * @constructor
