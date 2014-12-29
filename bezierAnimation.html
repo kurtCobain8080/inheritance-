@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BezierAnimation</title>
+    <style>body { text-align: center }</style>
+    <script src="extend.js"></script>
+    <script src="offset.js"></script>
+    <script src="bezier.js"></script>
+    <script src="requestFrame.js"></script>
+    <script src="canvasElementPrototype.js"></script>
+    <script src="canvasElement.js"></script>
+    <script src="circle.js"></script>
+    <script src="line.js"></script>
+    <script src="rectangle.js"></script>
+    <script src="bezierCurve.js"></script>
+    <script src="setCanvas.js"></script>
+</head>
+<body>
+<div style="position:absolute;top:0;left:0;width:10px;height:10px;background:black;"></div>
+<span style="position:absolute;top:20px;left:0;width:10px;height:10px;background:black;"></span>
+<canvas id="bezierAnimation" width="400" height="250"></canvas>
+<script>
+    var img = new Image();
+    var contextPadding = 50;
+    img.src = 'images/grid.png';
+    img.onload = function(){
+        var context = setCanvas();
+        context.root.push(
+            CanvasElement({
+                "context" : context,
+                "background-image" : img,
+                "x" : 50,
+                "y" : 50,
+                "width" : 300,
+                "height" : 150
+            })
+        );
+        var bezierWidth = context.canvas.width - contextPadding - contextPadding;
+        var bezierHeight = context.canvas.height - contextPadding - contextPadding;
+        context.root.push(
+            bezierCurve({
+                "context" : context,
+                "x1" : contextPadding,
+                "y1" : context.canvas.height - contextPadding,
+                "cp1x" : contextPadding + ( bezierWidth * 0.25 ),
+                "cp1y" : ( contextPadding + bezierHeight ) - ( bezierHeight * 0.25 ),
+                "cp2x" : ( contextPadding + bezierWidth ) - ( bezierWidth * 0.25 ) ,
+                "cp2y" : contextPadding + ( bezierHeight * 0.25 ),
+                "x2" : context.canvas.width - contextPadding,
+                "y2" : contextPadding,
+                "lineWidth" : 0.5,
+                "name" : 'bezierCurve'
+            })
+        );
+    };
+</script>
+<button onclick="stop()">Stop</button>
+<button onclick="play()">Play</button>
+<script>
+
+    var el = document.querySelector('div');
+    var el2 =  document.querySelector('span');
+    console.log(el);
+
+    // animation: duration 5000, space 500 px
+    var duration = 2000;
+    var counter = 0;
+    var left = 1;
+    var time = 33;
+    //var amount = 1 / ( 2000 / time );
+    var start = 0;
+    var progress = 0;
+    var animationTime = 0;
+    var stopvar = false;
+    var now = 0;
+    var delay = 0;
+    function loop(timestamp){
+        if ( stopvar ) return;
+        requestAnimationFrame(loop);
+        progress = timestamp - start;
+        start = timestamp;
+        now+=progress;
+        amount = 1 / ( 2000 / progress );
+        animationTime = ( animationTime + amount )+ delay > 1 ? 1 : (animationTime + amount) + delay;
+        console.log('progress --->' , animationTime, '\n now-->',now );
+        //left = Bezier.cubicBezier(0.755, 0.050, 0.855, 0.060, animationTime, 2000);
+        left = Bezier.linear(animationTime, duration);
+        animationTime= animationTime == 1 ? 0 : animationTime;
+        progress = animationTime == 0 ? 0 : progress;
+        delay =  animationTime == 0 ? animationTime + amount : 0;
+        //el.style.left = left*500 + 'px';
+        el.style.transform = "translate3d(" + left*500 + "px,0,0)";
+        //console.log('left ', counter , ' -->', left);
+        //counter= counter >= 1 ? 0 : time >= progress || time > ( time - time/2 ) ? counter + amount : counter;
+    }
+    function stop(){
+        stopvar = true;
+        cancelAnimationFrame(loop);
+    }
+    function play(){
+        if ( !stopvar ) return;
+        stopvar = false;
+        requestAnimationFrame(loop);
+    }
+
+    /*function loop2(timestamp){
+        console.log('timestamp --->' , timestamp)
+        if (start === null) start = timestamp;
+        progress = timestamp - start;
+        left = Bezier.cubicBezier(1,1,.27,1.63, counter, 5000);
+        el2.style.transform = "translate3d(" + left*500 + "px,0,0)";
+        //console.log('left ', counter , ' -->', left);
+        counter= counter >= 1 ? 0 : progress >= time || progress > ( time - ( time/2 ) ) ? counter + amount : counter;
+    }
+
+    window.setInterval(
+            function(){
+                var timestamp = Date.now();
+                loop2(timestamp);
+            },1000/60
+    );*/
+
+    requestAnimationFrame(loop);
+</script>
+</body>
+</html>

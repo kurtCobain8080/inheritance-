@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upload</title>
+</head>
+<body>
+<input type="file" multiple="multiple" id="UploadInput" value=""/>
+<input type="file" multiple="multiple" id="UploadInput2" value=""/>
+<script src="uploadFile.js"></script>
+<script>
+    var UploadInput = document.getElementById("UploadInput");
+    var UploadInput2 = document.getElementById("UploadInput2");
+    uploadFile(UploadInput,function(processedFile){
+        console.log(processedFile);
+    });
+    uploadFile(UploadInput2,function(processedFile){
+        console.log(processedFile);
+    });
+</script>
+</body>
+</html>

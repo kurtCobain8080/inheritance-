@@ -39,35 +39,71 @@
  * {@link http://www.w3schools.com/tags/tryit.asp?filename=tryhtml5_canvas_drawimage_video}
  */
 function CanvasImage(options){
+    if ( typeof options.img === 'undefined' || options.img.src === 'undefined' ) return;
+
     var defaults = {
         "context" : document.getElementsByTagName('canvas')[0].getContext("2d"),
         "img" : null,
         "sx" : 0,
         "sy" : 0,
-        "swidth" : 0,
-        "sheight" : 0,
+        "swidth" : options.img.naturalWidth,
+        "sheight" : options.img.naturalHeight,
         "x" : 0,
         "y" : 0,
         "z" : 0,
         "width" : 0,
         "height" : 0,
+        "name" : null,
+        "border" : null,
         "behaviour" : function(){}
     };
-    this.settings = extend(defaults,options);
-    var settings = this.settings;
-    this.draw = function(){
-        settings.context.drawImage(
-            settings.img,
-            settings.sx,
-            settings.sy,
-            settings.swidth,
-            settings.sheight,
-            settings.x,
-            settings.y,
-            settings.width,
-            settings.height
-        );
+    var $self = new function(){
+        /* creating events callbacks */
+        var events = [];
+        this.on = function(event,callback){
+            function action(e){
+                var x = e.pageX - settings.context.leftEl;
+                var y = e.pageY - settings.context.topEl;
+                var x1 = settings.x + settings.width;
+                var y1 = settings.y + settings.height;
+                if ( ( x >= settings.x && x <= x1 ) &&
+                    ( y >= settings.y && y <= y1 )
+                    )
+                    callback(e);
+            }
+            settings.context.canvas.addEventListener(event,action,false);
+            events.push({
+                'event' : event,
+                'action' : action
+            })
+        };
+        this.destroy = function(){
+            for(var i = 0; i<events.length; i++)
+                settings.context.canvas.removeEventListener(events[i].event,events[i].action,false);
+        };
     };
-    return this;
-
+    $self.settings = extend(defaults,options);
+    var settings = $self.settings;
+    $self.draw = function(){
+            settings.context.drawImage(
+                settings.img,
+                settings.sx,
+                settings.sy,
+                settings.swidth,
+                settings.sheight,
+                settings.x,
+                settings.y,
+                settings.width,
+                settings.height
+            );
+            if ( settings.border )
+                settings.context.strokeRect(settings.x,settings.y,settings.width,settings.height);
+    };
+    /* creating imgData properties */
+    var fakeCanvas = document.createElement('canvas');
+    fakeCanvas.width = settings.img.naturalWidth;
+    fakeCanvas.height = settings.img.naturalHeight;
+    fakeCanvas.getContext("2d").drawImage(settings.img,0,0,fakeCanvas.width,fakeCanvas.height);
+    $self.imgData = fakeCanvas.getContext("2d").getImageData(0,0,fakeCanvas.width,fakeCanvas.height);
+    return $self;
 }

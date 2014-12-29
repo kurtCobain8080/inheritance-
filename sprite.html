@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sprite</title>
+    <style>
+        body{
+            margin:0;
+        }
+        canvas{
+            border:1px solid;
+        }
+    </style>
+</head>
+<body>
+<input type="file" multiple="multiple" id="UploadInput" value="" placeholder="Carica File"/>
+<div style="clear:both">
+    <canvas id="spritepad"></canvas>
+</div>
+<script src="extend.js"></script>
+<script src="image.js"></script>
+<script src="requestFrame.js"></script>
+<script src="offset.js"></script>
+<script src="setCanvas.js"></script>
+<script src="createSprite.js"></script>
+<script src="uploadFile.js"></script>
+<script>
+    var context = setCanvas({ el : document.getElementById('spritepad'), height : 400 } );
+    var sprite = createSprite(context);
+    //var image = null;
+    var countX = 0;
+    var countY = 0;
+    uploadFile(document.getElementById('UploadInput'),function(procImg){
+        //if ( image ) context.root.remove(image.settings.name);
+        //image = context.root.push( CanvasImage({ x:0, y:0,img:procImg,width:procImg.naturalWidth,height:procImg.naturalHeight }) );
+        var image = sprite.add(procImg);
+        context.canvas.width = sprite.width;
+        context.canvas.height = sprite.height;
+        //image.draw();
+        image.on('click',function(e){
+            //console.log('this',this);
+            console.log('image.settings.name',image.settings.name);
+        });
+    });
+</script>
+</body>
+</html>
