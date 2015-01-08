@@ -2,45 +2,26 @@
  * Created by simone.dinuovo on 22/12/14.
  */
 
+
+
 /**
- * canvas image prototype
- * numbers should be integers ( otherwise, performance could be slower )
- * @requires <extend.js>
- * @param {Object} options {
-     * @param context {CanvasRenderingContext2D} - Specifies the image, canvas, or video element to use
-     * @param img {HTMLImageElement} - Specifies the image, canvas, or video element to use
-     * @param sx {int|number} - Optional. The x coordinate ( of the image ) where to start clipping
-     * @param sy {int|number} - Optional. The y coordinate where to start clipping
-     * @param swidth {int|number} - Optional. The width of the clipped image
-     * @param sheight {int|number} - Optional. The height of the clipped image
-     * @param x {int|number} - The x coordinate where to place the image on the canvas
-     * @param y {int|number} - The y coordinate where to place the image on the canvas
-     * @param width {int|number} - Optional. The width of the image to use (stretch or reduce the image) ( clipped image should have the same value of swidth )
-     * @param height {int|number} - Optional. The height of the image to use (stretch or reduce the image) ( clipped image should have the same value of sheight )
- * }
- *
- * @example
- * // insert image in x,y
- * ctx.drawImage(img, 10, 10);
- * {@link http://www.w3schools.com/tags/tryit.asp?filename=tryhtml5_canvas_drawimage}
- *
- * @example
- * // Position the image on the canvas, and specify width and height of the image:
- * ctx.drawImage(img,10,10,150,180);
- * {@link http://www.w3schools.com/tags/tryit.asp?filename=tryhtml5_canvas_drawimage2}
- *
- * @example
- * // Clip the image and position the clipped part on the canvas:
- * ctx.drawImage(img,90,130,50,60,10,10,50,60);
- * {@link http://www.w3schools.com/tags/tryit.asp?filename=tryhtml5_canvas_drawimage3}
- *
- *  * @example
- * // link to code that draws the frames of a video
- * {@link http://www.w3schools.com/tags/tryit.asp?filename=tryhtml5_canvas_drawimage_video}
+ * @require extend.js
+ * @require canvasElementPrototype
+ * @param options {options} jsobject of parameters
+ * @property context {CanvasRenderingContext2D} - Specifies the image, canvas, or video element to use. See {@link https://developer.mozilla.org/en/docs/Web/API/CanvasRenderingContext2D|CanvasRenderingContext2D}
+ * @property img {HTMLImageElement} - Specifies the image, canvas, or video element to use
+ * @property sx {int|number} - Optional. The x coordinate ( of the image ) where to start clipping
+ * @property sy {int|number} - Optional. The y coordinate where to start clipping
+ * @property swidth {int|number} - Optional. The width of the clipped image
+ * @property sheight {int|number} - Optional. The height of the clipped image
+ * @property x {int|number} - The x coordinate where to place the image on the canvas
+ * @property y {int|number} - The y coordinate where to place the image on the canvas
+ * @property width {int|number} - Optional. The width of the image to use (stretch or reduce the image) ( clipped image should have the same value of swidth )
+ * @property height {int|number} - Optional. The height of the image to use (stretch or reduce the image) ( clipped image should have the same value of sheight )
+ * @returns {canvasElementPrototype}
  */
 function CanvasImage(options){
     if ( typeof options.img === 'undefined' || options.img.src === 'undefined' ) return;
-
     var defaults = {
         "context" : document.getElementsByTagName('canvas')[0].getContext("2d"),
         "img" : null,
@@ -57,33 +38,9 @@ function CanvasImage(options){
         "border" : null,
         "behaviour" : function(){}
     };
-    var $self = new function(){
-        /* creating events callbacks */
-        var events = [];
-        this.on = function(event,callback){
-            function action(e){
-                var x = e.pageX - settings.context.leftEl;
-                var y = e.pageY - settings.context.topEl;
-                var x1 = settings.x + settings.width;
-                var y1 = settings.y + settings.height;
-                if ( ( x >= settings.x && x <= x1 ) &&
-                    ( y >= settings.y && y <= y1 )
-                    )
-                    callback(e);
-            }
-            settings.context.canvas.addEventListener(event,action,false);
-            events.push({
-                'event' : event,
-                'action' : action
-            })
-        };
-        this.destroy = function(){
-            for(var i = 0; i<events.length; i++)
-                settings.context.canvas.removeEventListener(events[i].event,events[i].action,false);
-        };
-    };
-    $self.settings = extend(defaults,options);
-    var settings = $self.settings;
+    var settings = extend(defaults,options);
+    var $self = new canvasElementPrototype(settings);
+    $self.settings = settings;
     $self.draw = function(){
             settings.context.drawImage(
                 settings.img,
@@ -107,3 +64,18 @@ function CanvasImage(options){
     $self.imgData = fakeCanvas.getContext("2d").getImageData(0,0,fakeCanvas.width,fakeCanvas.height);
     return $self;
 }
+
+/*
+ // insert image in x,y
+ ctx.drawImage(img, 10, 10);
+ http://www.w3schools.com/tags/tryit.asp?filename=tryhtml5_canvas_drawimage
+ // Position the image on the canvas, and specify width and height of the image:
+ ctx.drawImage(img,10,10,150,180);
+ http://www.w3schools.com/tags/tryit.asp?filename=tryhtml5_canvas_drawimage2
+ // Clip the image and position the clipped part on the canvas:
+ ctx.drawImage(img,90,130,50,60,10,10,50,60);
+ http://www.w3schools.com/tags/tryit.asp?filename=tryhtml5_canvas_drawimage3
+
+ // link to code that draws the frames of a video
+ http://www.w3schools.com/tags/tryit.asp?filename=tryhtml5_canvas_drawimage_video
+ */

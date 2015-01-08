@@ -17,8 +17,11 @@
         margin:20px;
     }
     </style>
+    <script src="objectArray.js"></script>
     <script src="extend.js"></script>
     <script src="offset.js"></script>
+    <script src="timeline.js"></script>
+    <script src="animation.js"></script>
     <script src="bezier.js"></script>
     <script src="requestFrame.js"></script>
     <script src="canvasElementPrototype.js"></script>
@@ -31,29 +34,29 @@
     <!-- <script src="build/Prova0.0.2.min.js"></script> -->
 </head>
 <body>
-<div id="animationSquare" style="position:absolute;top:0;left:0;width:10px;height:10px;background:black;"></div>
-<!--<canvas id="animationSquare">
-</canvas>-->
+<!-- <div id="animationSquare" style="position:absolute;top:0;left:0;width:10px;height:10px;background:black;"></div> -->
+<canvas id="animationSquare">
+</canvas>
 <canvas id="bezierAnimation" width="450" height="300"></canvas>
 <div><div>Animation:</div>
     <div>
-        Duration:<input id="duration" type="number" value="2000" />
+        Duration:<input id="duration" type="number" value="1000" />
     </div>
     <label for="cpx1">
         cpx1
-        <input type="number" id="cpx1" onfocus="cp1x.stateFocus = true" onblur="cp1x.stateBlur = true" />
+        <input type="number" id="cpx1" value="0" onfocus="cp1x.stateFocus = true" onchange="cp1x.stateBlur = true" />
     </label>
     <label for="cpy1">
         cpy1
-        <input type="number" id="cpy1" onfocus="cp1y.stateFocus = true" onblur="cp1y.stateBlur = true"/>
+        <input type="number" id="cpy1" value="0" onfocus="cp1y.stateFocus = true" onchange="cp1y.stateBlur = true"/>
     </label>
     <label for="cpx2">
         cpx2
-        <input type="number"  id="cpx2" onfocus="cp2x.stateFocus = true" onblur="cp2x.stateBlur = true" />
+        <input type="number"  id="cpx2" value="1" onfocus="cp2x.stateFocus = true" onchange="cp2x.stateBlur = true" />
     </label>
         cpy2
     <label for="cpy2">
-        <input type="number"  id="cpy2" onfocus="cp2y.stateFocus = true" onblur="cp2y.stateBlur = true" />
+        <input type="number"  id="cpy2" value="1" onfocus="cp2y.stateFocus = true" onchange="cp2y.stateBlur = true" />
     </label>
 </div>
 <script>
@@ -68,6 +71,7 @@
     img.src = 'images/grid.png';
     img.onload = function(){
         var context = setCanvas({
+            el : document.getElementById('bezierAnimation'),
             update : function(){
                 var bezier = context.root.bezierCurve;
                 if ( !cp1x.stateFocus ) {
@@ -130,71 +134,123 @@
 <button onclick="stop()">Stop</button>
 <button onclick="play()">Play</button>
 <script>
-    var el = document.getElementById('animationSquare');
-    // animation: duration 5000, space 500 px
-    var durationInput = document.getElementById('duration');
-    var counter = 0;
-    var left = 1;
-    var time = 33;
-    //var amount = 1 / ( 2000 / time );
-    var start = 0;
-    var progress = 0;
-    var animationTime = 0;
-    var stopvar = false;
-    var now = 0;
-    var delay = 0;
-    function loop(timestamp){
-        if ( stopvar ) return;
-        requestAnimationFrame(loop);
-        var duration = Number( durationInput.value );
-        progress = timestamp - start;
-        start = timestamp;
-        now+=progress;
-        amount = 1 / ( duration / progress );
-        //animationTime = ( animationTime + amount )+ delay > 1 ? 1 : (animationTime + amount) + delay;
-        animationTime = ( animationTime + amount ) > 1 ? 1 : (animationTime + amount);
-        console.log('progress --->' , animationTime, '\n now-->',now, 'amount-->', amount );
-        //left = Bezier.cubicBezier(0.755, 0.050, 0.855, 0.060, animationTime, 2000);
-        var left = Bezier.cubicBezier(Number(cp1x.value), Number(cp1y.value), Number(cp2x.value), Number(cp2y.value), animationTime, duration);
-        //left = Bezier.linear(animationTime, duration);
-        animationTime= animationTime == 1 ? 0 : animationTime;
-        progress = animationTime == 0 ? 0 : progress;
-        delay =  animationTime == 0 ? animationTime + amount : 0;
-        if ( now > 1000000 && progress == 0) now = 0;
-        //el.style.left = left*500 + 'px';
-        el.style.transform = "translate3d(" + left*500 + "px,0,0)";
-        console.log('left', left*500);
-        //console.log('left ', counter , ' -->', left);
-        //counter= counter >= 1 ? 0 : time >= progress || time > ( time - time/2 ) ? counter + amount : counter;
-    }
-    function stop(){
-        stopvar = true;
-        cancelAnimationFrame(loop);
-    }
-    function play(){
-        if ( !stopvar ) return;
-        stopvar = false;
-        requestAnimationFrame(loop);
-    }
-
-    /*function loop2(timestamp){
-        console.log('timestamp --->' , timestamp)
-        if (start === null) start = timestamp;
-        progress = timestamp - start;
-        left = Bezier.cubicBezier(1,1,.27,1.63, counter, 5000);
-        el2.style.transform = "translate3d(" + left*500 + "px,0,0)";
-        //console.log('left ', counter , ' -->', left);
-        counter= counter >= 1 ? 0 : progress >= time || progress > ( time - ( time/2 ) ) ? counter + amount : counter;
-    }
-
-    window.setInterval(
-            function(){
-                var timestamp = Date.now();
-                loop2(timestamp);
-            },1000/60
+    var context = setCanvas({
+        el : document.getElementById('animationSquare'),
+        width:500,
+        height:0
+    });
+    /*var rectangle = context.root.push(
+            Rectangle({
+                "context" : context,
+                "x" : 0,
+                "y" : 0,
+                "width" : 10,
+                "height" : 10
+            })
+    );
+    var rectangle2 = context.root.push(
+            Rectangle({
+                "context" : context,
+                "x" : 0,
+                "y" : 20,
+                "width" : 10,
+                "height" : 10
+            })
+    );
+    var rectangle3 = context.root.push(
+            Rectangle({
+                "context" : context,
+                "x" : 0,
+                "y" : 40,
+                "width" : 10,
+                "height" : 10
+            })
     );*/
 
-    requestAnimationFrame(loop);
+    /**
+     *
+     * @type { object
+         * {
+         * transition: string, - linear, ease, ease-in, ease-out, cubic-bezier()
+         * duration: number,
+         * cycle: boolean
+         * }}
+     */
+            var interpolation = [];
+    interpolation[0] = {
+        'transition' : 'cubic-bezier(0,0,1,1)',
+        'duration' : 1000,
+        'cycle' : true,
+        'pointA' : {
+            'x' : 500
+        },
+        'pointB' : {
+            'x' : -500
+        }
+    };
+    interpolation[1] = {
+        'transition' : 'cubic-bezier(0,0,1,1)',
+        'duration' : 1000,
+        'cycle' : true,
+        'pointA' : {
+            'x' : 0
+        },
+        'pointB' : {
+            'x' : 500
+        }
+    };
+    var colorE = false;
+    var interE = false;
+    var durationInput = document.getElementById('duration');
+    function animazioneEE(z){
+        var element = context.root.push(
+                Rectangle({
+                    "context" : context,
+                    "x" : 0,
+                    "y" : 11*z,
+                    "width" : 10,
+                    "height" : 10
+                })
+        );
+        element.settings.background = colorE ? '#111' : 'blue';
+        //var intere = interE ? interpolation[0] : interpolation[1]
+        var animations = element.timeline.addLabel('prova',interpolation[0]);
+        var tweening = element.animation(animations);
+        var animazionecondivisa = function(){
+            tweening.transition.parameters[0] = Number(cp1x.value);
+            tweening.transition.parameters[1] = Number(cp1y.value);
+            tweening.transition.parameters[2] = Number(cp2x.value);
+            tweening.transition.parameters[3] = Number(cp2y.value);
+            tweening.duration = Number( durationInput.value );
+            //tweening.transition = 'cubic-bezier(' + Number(cp1x.value) + ',' + Number(cp1y.value) + ',' + Number(cp2x.value) + ',' + Number(cp2y.value) + ')'
+        };
+        element.updates.push(animazionecondivisa);
+        colorE = !colorE;
+        interE = !interE;
+    }
+    for ( var i = 0; i < 250; i++)
+        animazioneEE(i)
+    {
+
+    //rectangle[i].updates.push(animazionecondivisa);
+    /*var up = rectangle.updates.push(
+            function(timestamp,progress){
+                var duration = Number( durationInput.value );
+                amount = 1 / ( duration / progress );
+                animationTime = ( animationTime + amount ) > 1 ? 1 : (animationTime + amount);
+                var left = Bezier.cubicBezier(Number(cp1x.value), Number(cp1y.value), Number(cp2x.value), Number(cp2y.value), animationTime, duration);
+                animationTime = animationTime == 1 ? 0 : animationTime;
+                rectangle.settings.x = left*500;
+            }
+    );*/
+    }
+    function stop(){
+        context.stop();
+    }
+    function play(){
+        context.play();
+    };
+    context.canvas.height = (i*10)+5;
 </script>
 </body>
 </html>

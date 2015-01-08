@@ -26,7 +26,7 @@ var Rectangle = function(options){
         "z" : 0,
         "width" : 0,
         "height" : 0,
-        "border" : "#000",
+        "border" : "transparent",
         "background" : "#000",
         "name" : null
     };
@@ -37,7 +37,7 @@ var Rectangle = function(options){
         settings.context.beginPath();
         if (settings.border != 'transparent') {
             settings.context.beginPath();
-            settings.context.strokeStyle= settings.border;
+            settings.context.strokeStyle = settings.border;
             settings.context.strokeRect(settings.x-1,settings.y-1,settings.width+1,settings.height+1);
         }
         if (settings.background != 'transparent') {

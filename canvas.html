@@ -5,9 +5,11 @@
     <style>
         body{
             margin:0;
+            overflow-y:hidden;
         }
     </style>
     <script src="extend.js"></script>
+    <script src="canvasElementPrototype.js"></script>
     <script src="rectangle.js"></script>
     <script src="offset.js"></script>
     <script src="setCanvas.js"></script>
@@ -22,8 +24,8 @@
 <script>
     /* setting canvas */
     var canvas2 = document.getElementById('canvas');
-    var context = setCanvas();
-    var context2 = setCanvas({ el : canvas2, height : 300 });
+    var context = setCanvas({width: window.innerWidth, height : 300});
+    var context2 = setCanvas({ el : canvas2, width: window.innerWidth, height : 300 });
     context.canvas.height = 300;
 
     /* filling elements in context-->root */

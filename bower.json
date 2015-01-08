@@ -1,0 +1,14 @@
+{
+  "name": "bowerProva",
+  "version": "0.0.1",
+  "description": "prova",
+  "main": "prova.js",
+  "keywords": [
+    "prova"
+  ],
+  "authors": [
+    "prova"
+  ],
+  "license": "MIT",
+  "private": true
+}

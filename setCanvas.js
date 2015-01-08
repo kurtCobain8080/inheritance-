@@ -31,12 +31,33 @@ function setCanvas(options){
     }
     var settings = extend(defaults,options);
     var context = settings.el.getContext("2d");
+    context.updates = [settings.update];
+    context.update = function(timestamp, progress){
+        for(var i = 0;i<context.updates.length;i++)
+            context.updates[i](timestamp, progress);
+    }
     context.settings = settings;
     var viewportOffset = offset(settings.el);
     context.topEl = viewportOffset.top;
     context.leftEl = viewportOffset.left;
     context.canvas.width = settings.width ||  context.canvas.width;
     context.canvas.height = settings.height ||  context.canvas.height;
+    context.elements = [];
+    context.elements.clean = function(deleteValue) {
+        for (var i = 0; i < this.length; i++) {
+            if (this[i] == deleteValue) {
+                this.splice(i, 1);
+                i--;
+            }
+        }
+        return this;
+    };
+    context.elements.remove = function(index){
+        this.splice(index,1);
+        for(var i = index;i<this.length; i++)
+            context.elements[i].settings.index = context.elements.indexOf(context.elements[i]);
+
+    };
     context.root = {
         /**
          * push a canvasElement object in root
@@ -45,7 +66,9 @@ function setCanvas(options){
          */
         push : function(obj){
             obj.settings.name = obj.settings.name || 'layer' + context.root.length();
-            context.root[obj.settings.name] = obj;
+            var newObj = context.root[obj.settings.name] = obj;
+            newObj.settings.index = context.elements.length;
+            context.elements.push(newObj);
             return context.root[obj.settings.name];
         },
         /**
@@ -60,19 +83,38 @@ function setCanvas(options){
          * @param {string} layer - layer name
          */
         remove : function(layer){
+            if ( typeof context.root[layer] === 'undefined' ) return false;
             context.root[layer].destroy();
+            context.elements.remove(context.root[layer].settings.index);
             delete context.root[layer];
         }
     };
-    context.frames = requestFrame(function(progress){
-        context.settings.update(progress);
+    var stop = false;
+    context.frames = requestFrame(function(timestamp, progress){
+        if ( stop ) return;
+        context.update(timestamp, progress);
         context.clearRect(0,0,context.canvas.width,context.canvas.height);
         for(var k in context.root)
+        {
             if ( typeof context.root[k].draw !== 'undefined' )
-            context.root[k].draw();
+            {
+                if ( typeof context.root[k].update !== 'undefined' )
+                    context.root[k].update(timestamp, progress,context.root[k]);
 
-        context.settings.postRender(progress);
+                context.root[k].draw();
+                if ( typeof context.root[k].postRender !== 'undefined' )
+                    context.root[k].postRender(timestamp, progress,context.root[k]);
+            }
+        }
+        context.settings.postRender(timestamp, progress);
     });
+    context.frames.label = settings.el.id;
+    context.stop = function(){
+        stop = true;
+    };
+    context.play = function(){
+        stop = false;
+    };
     context.getElement = function(name){
         return context.root[name];
     };

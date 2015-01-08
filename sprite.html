@@ -9,37 +9,189 @@
         canvas{
             border:1px solid;
         }
+        .properties{
+            position:absolute;
+            border:1px solid #ccc;
+            border-radius:7px;
+            box-shadow:2px 2px 4px 1px #ccc;
+            padding:10px;
+            right:10px;
+            top:20px;
+        }
+        .properties label{
+            clear:both;
+            float:left;
+            width:100%;
+            margin:10px 0;
+        }
+        .properties input{
+            float:right;
+        }
+        .spriteSelection{
+            opacity:0.3;
+            background:#666;
+            position:absolute;
+        }
     </style>
 </head>
 <body>
+<ul id="timeline">
+    <li>Start</li>
+</ul>
 <input type="file" multiple="multiple" id="UploadInput" value="" placeholder="Carica File"/>
 <div style="clear:both">
     <canvas id="spritepad"></canvas>
+</div>
+<div class="properties">
+    <label>
+        Name:
+        <input id="elName" />
+    </label>
+    <label>
+        X:
+        <input id="elX" />
+    </label>
+    <label>
+        Y:
+        <input id="elY" />
+    </label>
+    <label>
+        WIDTH:
+        <input id="elWidth" />
+    </label>
+    <label>
+        HEIGHT:
+        <input id="elHeight" />
+    </label>
+    <label>
+        INDEX:
+        <input id="elIndex" />
+    </label>
+
 </div>
 <script src="extend.js"></script>
 <script src="image.js"></script>
 <script src="requestFrame.js"></script>
 <script src="offset.js"></script>
+<script src="canvasElementPrototype.js"></script>
+<script src="canvasElement.js"></script>
 <script src="setCanvas.js"></script>
 <script src="createSprite.js"></script>
 <script src="uploadFile.js"></script>
+<script src="spriteSelection.js"></script>
+<!-- <script src="build/Prova0.0.3.min.js"></script> -->
 <script>
     var context = setCanvas({ el : document.getElementById('spritepad'), height : 400 } );
     var sprite = createSprite(context);
-    //var image = null;
     var countX = 0;
     var countY = 0;
-    uploadFile(document.getElementById('UploadInput'),function(procImg){
-        //if ( image ) context.root.remove(image.settings.name);
-        //image = context.root.push( CanvasImage({ x:0, y:0,img:procImg,width:procImg.naturalWidth,height:procImg.naturalHeight }) );
-        var image = sprite.add(procImg);
-        context.canvas.width = sprite.width;
-        context.canvas.height = sprite.height;
-        //image.draw();
-        image.on('click',function(e){
-            //console.log('this',this);
-            console.log('image.settings.name',image.settings.name);
-        });
+    var properties = document.querySelectorAll('.properties input');
+    var currentSelection = spriteSelection(context,properties);
+    // keyboard select events
+    /**
+     * @private shiftKey - register shift button
+     * @type {boolean}
+     */
+    var shiftKey = false;
+    /**
+     * @private ctrlKey - register ctrl button
+     * @type {boolean}
+     */
+    var ctrlKey = false;
+
+    /**
+     *
+     * @param keyCode {int} - javascript keycode
+     * @param event {string}
+     */
+    function keyMap(keyCode, event){
+        if ( event == 'keydown' )
+            var bool = true;
+        else
+            var bool = false;
+
+        switch( keyCode ){
+            case 16:
+                shiftKey = bool;
+            case 17:
+                ctrlKey = bool;
+            default:
+                break;
+        }
+    }
+
+    /**
+     * document keydown register
+     */
+    document.addEventListener('keydown',function(e){
+        e.preventDefault();
+        keyMap(e.which,'keydown')
+    });
+    /**
+     * document keyup register
+     */
+    document.addEventListener('keyup',function(e){
+        e.preventDefault();
+        keyMap(e.which,'keyup')
+    });
+    // upload files
+    uploadFile({
+        el : document.getElementById('UploadInput'),
+        change : function(){
+            sprite.clear();
+            context.root.remove('spriteSelected');
+        },
+        callback : function(procImg){
+            var image = sprite.addSprite(procImg);
+            context.canvas.width = sprite.width;
+            context.canvas.height = sprite.height;
+            image.on('click',function(e){
+                if ( currentSelection.elements.length && shiftKey )
+                {
+                    var index = context.root[ currentSelection.elements[0] ].settings.index;
+                    var index2 = image.settings.index;
+                    currentSelection.clear();
+                    if ( index > index2 )
+                    {
+                        for(var i = index2;i <= index;i++)
+                            currentSelection.add(context.elements[i]);
+                    }
+                    else
+                    {
+                        for(var i = index;i <= index2;i++)
+                            currentSelection.add(context.elements[i]);
+                    }
+                    return;
+                }
+                else if ( !currentSelection.elements.length && shiftKey )
+                {
+                    var index = image.settings.index;
+                    for(var i = 0;i <= index;i++)
+                        currentSelection.add(context.elements[i]);
+
+                    return;
+                }
+                else if (ctrlKey && currentSelection.elements.indexOf(image.settings.name) < 0)
+                {
+                    currentSelection.add(image);
+                    return;
+                }
+                else if (!ctrlKey && currentSelection.elements.indexOf(image.settings.name) < 0)
+                {
+                    currentSelection.add(image);
+                    return;
+                }
+                else if (currentSelection.elements.indexOf(image.settings.name) > -1 )
+                {
+                    currentSelection.remove(image);
+                    return;
+                }
+                else
+                    currentSelection.add(image);
+
+                console.log('currentSelection.elements', currentSelection.elements);
+            });
+        }
     });
 </script>
 </body>

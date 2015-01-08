@@ -34,38 +34,16 @@ function CanvasElement(options){
         "background-color" : null,
         "background-image" : null,
         "background-repeat" : null,
+        "opacity" : null,
         "behaviour" : function(){}
     };
-    var $self = new function(){
-        /* creating events callbacks */
-        var events = [];
-        this.on = function(event,callback){
-            function action(e){
-                var x = e.pageX - settings.context.leftEl;
-                var y = e.pageY - settings.context.topEl;
-                var x1 = settings.x + settings.width;
-                var y1 = settings.y + settings.height;
-                if ( ( x >= settings.x && x <= x1 ) &&
-                    ( y >= settings.y && y <= y1 )
-                    )
-                    callback(e);
-            }
-            settings.context.canvas.addEventListener(event,action,false);
-            events.push({
-                'event' : event,
-                'action' : action
-            })
-        };
-        this.destroy = function(){
-            for(var i = 0; i<events.length; i++)
-                settings.context.canvas.removeEventListener(events[i].event,events[i].action,false);
-        };
-    };
-    $self.settings = extend(defaults,options);
-    var settings = $self.settings;
+    var settings = extend(defaults,options);
+    var $self = new canvasElementPrototype(settings);
+    $self.settings = settings;
     $self.draw = function(){
         var ctx = settings.context;
-        var pat = settings["background-image"] ? ctx.createPattern(settings["background-image"],settings['background-repeat'] || 'repeat') : 'transparent';
+        var repeat = settings['background-repeat'] ? settings['background-repeat'] : 'repeat';
+        var pat = settings["background-image"] ? ctx.createPattern(settings["background-image"],repeat) : null;
         if ( settings.border ){
             ctx.beginPath();
             ctx.lineWidth = settings.border;
@@ -75,10 +53,17 @@ function CanvasElement(options){
         }
         ctx.beginPath();
         ctx.rect(settings.x,settings.y,settings.width,settings.height);
+        if ( settings.opacity ) ctx.globalAlpha = settings.opacity;
         ctx.fillStyle = settings["background-color"];
-        ctx.fill();
+        if ( ctx.fillStyle ) ctx.fill();
         ctx.fillStyle=pat;
-        ctx.fill();
+        if ( ctx.fillStyle ) {
+            ctx.save();
+            ctx.translate(settings.x,settings.y);
+            ctx.fill();
+            ctx.restore();
+        }
+        ctx.globalAlpha = 1;
     };
     return $self;
 }

@@ -11,8 +11,10 @@ function createSprite(context){
     $self.height = 0;
     $self.currentWidth = 0;
     $self.currentHeight = 0;
+    $self.items = 0;
     $self.rows = 0;
-    $self.add = function(image){
+    $self.images = [];
+    $self.addSprite = function(image){
         var width = image.naturalWidth;
         var height = image.naturalHeight;
         $self.rows = ( $self.x + width < widthCostrain ) ? $self.rows : $self.rows + $self.currentHeight;
@@ -23,7 +25,23 @@ function createSprite(context){
         $self.currentHeight = height + $self.rows > $self.currentHeight ? height : $self.currentHeight;
         $self.height = $self.currentHeight + $self.rows;
         var img = context.root.push( CanvasImage({ x:$self.x, y:$self.y, img:image, width:width, height:height, border:true }) );
+        $self.images.push(img);
+        $self.items++;
         return img;
+    };
+    $self.clear = function(){
+        for(var i = $self.images.length-1;i>-1;i--)
+            context.root.remove($self.images[i].settings.name);
+
+        $self.x = 0;
+        $self.y = 0;
+        $self.width = 0;
+        $self.height = 0;
+        $self.currentWidth = 0;
+        $self.currentHeight = 0;
+        $self.items = 0;
+        $self.rows = 0;
+        $self.images = [];
     };
     return $self;
 }

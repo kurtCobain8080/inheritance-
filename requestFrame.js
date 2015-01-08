@@ -14,14 +14,16 @@ window.cancelAnimationFrame = window.cancelAnimationFrame || window.mozCancelAni
  */
 var requestFrame = function(render){
     var $self = function(){
+        var self = this;
         var start = 0;
         var stop = false;
+        this.label = '';
         var renderHeader = function(timestamp){
             if ( stop ) return;
             requestAnimationFrame(renderHeader);
             var progress = timestamp - start;
             start = timestamp;
-            render(progress);
+            render(timestamp, progress);
         }
         this.stop = function(){
             stop = true;
