@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<div class="importHtmlResource" data-url="resources/ui1.html"></div>
+<script src="importHtmlResource.js"></script>
+<script>
+    var resources = importHtmlResource();
+    function observation(){
+        if ( resources.loaded )
+        {
+            var z = $( "#draggable" ).draggable({
+                start: function() {
+                    console.log('start');
+                 },
+                drag: function() {
+                    console.log('drag');
+                },
+                stop: function() {
+                    console.log('stop');
+                }
+            });
+            console.log(window.location.pathname, typeof importHtmlResource);
+            console.log(z);
+        }
+        else
+            setTimeout(observation);
+    }
+
+    observation();
+</script>
+</body>
+</html>

@@ -71,7 +71,7 @@ function bezierCurve(options){
                 "background" : "#000",
                 "update" : function(){
                     cPoint1.settings.x = settings.cp1x;
-                    cPoint1.settings.y = Math.abs(settings.width - settings.cp1y);
+                    cPoint1.settings.y = settings.height - settings.cp1y;
                 },
                 "name" : "cPoint1"
             }
@@ -86,7 +86,7 @@ function bezierCurve(options){
                 "y1" : settings.cp1y,
                 "update" : function(){
                     cJoint1.settings.x1 = settings.cp1x;
-                    cJoint1.settings.y1 = Math.abs(settings.width - settings.cp1y);
+                    cJoint1.settings.y1 = settings.height - settings.cp1y;
                 },
                 "name" : "cJoint1"
             }
@@ -103,7 +103,7 @@ function bezierCurve(options){
                 "background" : "#000",
                 "update" : function(){
                     cPoint2.settings.x = settings.cp2x;
-                    cPoint2.settings.y = Math.abs(settings.width - settings.cp2y);
+                    cPoint2.settings.y = settings.height - settings.cp2y;
                 },
                 "name" : "cPoint2"
             }
@@ -115,10 +115,10 @@ function bezierCurve(options){
                 "x" : settings.x2,
                 "y" : settings.y2,
                 "x1" : settings.cp2x,
-                "y1" : Math.abs(settings.width - settings.cp2y),
+                "y1" : settings.height - settings.cp2y,
                 "update" : function(){
                     cJoint2.settings.x1 = settings.cp2x;
-                    cJoint2.settings.y1 = Math.abs(settings.width - settings.cp2y);
+                    cJoint2.settings.y1 = settings.height - settings.cp2y;
                 },
                 "name" : "cJoint2"
             }
@@ -174,9 +174,9 @@ function bezierCurve(options){
         ctx.beginPath();
         ctx.lineWidth = settings.lineWidth;
         ctx.moveTo(settings.x1, settings.y1);
-        ctx.bezierCurveTo(settings.cp1x, Math.abs(settings.width - settings.cp1y),
+        ctx.bezierCurveTo(settings.cp1x, settings.height - settings.cp1y,
             settings.cp2x,
-            Math.abs(settings.width - settings.cp2y),
+            settings.height - settings.cp2y,
             settings.x2,
             settings.y2);
         ctx.stroke();

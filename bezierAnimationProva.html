@@ -40,7 +40,7 @@
 <canvas id="bezierAnimation" width="450" height="300"></canvas>
 <div><div>Animation:</div>
     <div>
-        Duration:<input id="duration" type="number" value="1000" />
+        Duration:<input id="duration" type="number" value="4000" />
     </div>
     <label for="cpx1">
         cpx1
@@ -69,6 +69,7 @@
     var InterpolationInterfaceSizeY = ( 1 / 150 ); // 250 is the height of the maximum draggable canvas;
     var contextPadding = 75;
     img.src = 'images/grid.png';
+    var contextBezier;
     img.onload = function(){
         var context = setCanvas({
             el : document.getElementById('bezierAnimation'),
@@ -102,6 +103,7 @@
                 }
             }
         });
+        contextBezier = context;
         context.root.push(
             CanvasElement({
                 "context" : context,
@@ -129,6 +131,18 @@
                 "name" : 'bezierCurve'
             })
         );
+        var buttonPlay = document.createElement('button');
+        buttonPlay.click = function(){
+            context.frames.stop();
+        };
+        buttonPlay.innerText = 'Stop Bezier Frame';
+        var buttonStop = document.createElement('button');
+        buttonStop.click = function(){
+            context.frames.play();
+        };
+        buttonStop.innerText = 'Play Bezier Frame';
+        document.body.appendChild(buttonPlay);
+        document.body.appendChild(buttonStop);
     };
 </script>
 <button onclick="stop()">Stop</button>
@@ -139,47 +153,13 @@
         width:500,
         height:0
     });
-    /*var rectangle = context.root.push(
-            Rectangle({
-                "context" : context,
-                "x" : 0,
-                "y" : 0,
-                "width" : 10,
-                "height" : 10
-            })
-    );
-    var rectangle2 = context.root.push(
-            Rectangle({
-                "context" : context,
-                "x" : 0,
-                "y" : 20,
-                "width" : 10,
-                "height" : 10
-            })
-    );
-    var rectangle3 = context.root.push(
-            Rectangle({
-                "context" : context,
-                "x" : 0,
-                "y" : 40,
-                "width" : 10,
-                "height" : 10
-            })
-    );*/
+    var durationInput = document.getElementById('duration');
 
-    /**
-     *
-     * @type { object
-         * {
-         * transition: string, - linear, ease, ease-in, ease-out, cubic-bezier()
-         * duration: number,
-         * cycle: boolean
-         * }}
-     */
-            var interpolation = [];
+    var interpolation = [];
     interpolation[0] = {
+        'name' : 'prova',
         'transition' : 'cubic-bezier(0,0,1,1)',
-        'duration' : 1000,
+        'duration' : Number( durationInput.value ),
         'cycle' : true,
         'pointA' : {
             'x' : 500
@@ -189,9 +169,10 @@
         }
     };
     interpolation[1] = {
+        'name' : 'true',
         'transition' : 'cubic-bezier(0,0,1,1)',
-        'duration' : 1000,
-        'cycle' : true,
+        'duration' : Number( durationInput.value ),
+        'cycle' : false,
         'pointA' : {
             'x' : 0
         },
@@ -199,58 +180,82 @@
             'x' : 500
         }
     };
+    interpolation[2] = {
+        'name' : 'prova2',
+        'transition' : 'cubic-bezier(0,0,1,1)',
+        'duration' : Number( durationInput.value ),
+        'cycle' : false,
+        'pointB' : {
+            'x' : -500,
+            'y' : 10
+        }
+    };
+    interpolation[3] = {
+        'name' : 'prova3',
+        'transition' : 'cubic-bezier(0,0,1,1)',
+        'duration' : Number( durationInput.value ),
+        'cycle' : false,
+        'pointB' : {
+            'x' : 500,
+            'y' : -10
+        }
+    };
+    interpolation[4] = {
+        'name' : 'prova4',
+        'transition' : 'cubic-bezier(0,0,1,1)',
+        'duration' : Number( durationInput.value ),
+        'cycle' : false,
+        'pointB' : {
+            'x' : -500,
+            'y' : 0
+        }
+    };
     var colorE = false;
     var interE = false;
-    var durationInput = document.getElementById('duration');
     function animazioneEE(z){
+        var intere = interE ? interpolation[0] : interpolation[1];
+        var yyy = interE ? 500 : 0;
         var element = context.root.push(
                 Rectangle({
                     "context" : context,
-                    "x" : 0,
+                    "x" : yyy,
                     "y" : 11*z,
                     "width" : 10,
                     "height" : 10
                 })
         );
         element.settings.background = colorE ? '#111' : 'blue';
-        //var intere = interE ? interpolation[0] : interpolation[1]
-        var animations = element.timeline.addLabel('prova',interpolation[0]);
+        var animations = element.timeline.addLabel(intere);
         var tweening = element.animation(animations);
+        if ( intere === interpolation[1] )
+        {
+            var animations2 = element.timeline.addLabel(interpolation[2]);
+            var animations3 = element.timeline.addLabel(interpolation[3]);
+            var animations4 = element.timeline.addLabel(interpolation[4]);
+            //var tweening2 = element.animation(animations2);
+        }
+
         var animazionecondivisa = function(){
             tweening.transition.parameters[0] = Number(cp1x.value);
             tweening.transition.parameters[1] = Number(cp1y.value);
             tweening.transition.parameters[2] = Number(cp2x.value);
             tweening.transition.parameters[3] = Number(cp2y.value);
             tweening.duration = Number( durationInput.value );
-            //tweening.transition = 'cubic-bezier(' + Number(cp1x.value) + ',' + Number(cp1y.value) + ',' + Number(cp2x.value) + ',' + Number(cp2y.value) + ')'
         };
         element.updates.push(animazionecondivisa);
         colorE = !colorE;
         interE = !interE;
     }
-    for ( var i = 0; i < 250; i++)
+    for ( var i = 0; i < 20; i++)
         animazioneEE(i)
-    {
 
-    //rectangle[i].updates.push(animazionecondivisa);
-    /*var up = rectangle.updates.push(
-            function(timestamp,progress){
-                var duration = Number( durationInput.value );
-                amount = 1 / ( duration / progress );
-                animationTime = ( animationTime + amount ) > 1 ? 1 : (animationTime + amount);
-                var left = Bezier.cubicBezier(Number(cp1x.value), Number(cp1y.value), Number(cp2x.value), Number(cp2y.value), animationTime, duration);
-                animationTime = animationTime == 1 ? 0 : animationTime;
-                rectangle.settings.x = left*500;
-            }
-    );*/
-    }
     function stop(){
         context.stop();
-    }
+    };
     function play(){
         context.play();
     };
-    context.canvas.height = (i*10)+5;
+    context.canvas.height = (i*11)+10;
 </script>
 </body>
 </html>

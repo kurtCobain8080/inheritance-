@@ -51,7 +51,7 @@ function canvasElementPrototype(settings){
      */
     this.timeline = window.timeline();
     var timeline = this.timeline;
-    timeline.addLabel('start', settings);
+    //timeline.addLabel(settings);
     /**
      * @public
      * @var {array} updates
@@ -61,7 +61,7 @@ function canvasElementPrototype(settings){
     var updates = this.updates;
     if ( settings.update != undefined && settings.update ) updates.push(settings.update);
     updates.getElementByLabel = function(label){
-        var element = this.filter(function(e){
+        return this.filter(function(e){
             if ( e.label != undefined && e.label == label )
                 return e;
         });

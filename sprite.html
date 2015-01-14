@@ -36,7 +36,7 @@
 </head>
 <body>
 <ul id="timeline">
-    <li>Start</li>
+    <li contenteditable></li>
 </ul>
 <input type="file" multiple="multiple" id="UploadInput" value="" placeholder="Carica File"/>
 <div style="clear:both">
@@ -45,27 +45,27 @@
 <div class="properties">
     <label>
         Name:
-        <input id="elName" />
+        <input id="elName" disabled/>
     </label>
     <label>
         X:
-        <input id="elX" />
+        <input id="elX" disabled/>
     </label>
     <label>
         Y:
-        <input id="elY" />
+        <input id="elY" disabled/>
     </label>
     <label>
         WIDTH:
-        <input id="elWidth" />
+        <input id="elWidth" disabled/>
     </label>
     <label>
         HEIGHT:
-        <input id="elHeight" />
+        <input id="elHeight" disabled/>
     </label>
     <label>
         INDEX:
-        <input id="elIndex" />
+        <input id="elIndex" disabled/>
     </label>
 
 </div>
@@ -79,6 +79,8 @@
 <script src="createSprite.js"></script>
 <script src="uploadFile.js"></script>
 <script src="spriteSelection.js"></script>
+<script src="timeline.js"></script>
+<script src="animation.js"></script>
 <!-- <script src="build/Prova0.0.3.min.js"></script> -->
 <script>
     var context = setCanvas({ el : document.getElementById('spritepad'), height : 400 } );
@@ -124,16 +126,16 @@
      * document keydown register
      */
     document.addEventListener('keydown',function(e){
-        e.preventDefault();
+        //e.preventDefault();
         keyMap(e.which,'keydown')
-    });
+    },true);
     /**
      * document keyup register
      */
     document.addEventListener('keyup',function(e){
-        e.preventDefault();
+        //e.preventDefault();
         keyMap(e.which,'keyup')
-    });
+    },true);
     // upload files
     uploadFile({
         el : document.getElementById('UploadInput'),

@@ -2,8 +2,9 @@
  * Created by simone.dinuovo on 02/01/15.
  */
 
-var importHtmlResource = (function(){
+var importHtmlResource = function(){
     var requires = document.getElementsByClassName('importHtmlResource');
+    this.loaded = false;
     var getStylesheets = function(doc){
         var stylesheets = document.createDocumentFragment();
         var external = doc.querySelectorAll('link');
@@ -11,7 +12,7 @@ var importHtmlResource = (function(){
         for ( var i = 0; i<external.length; i++ )
         {
             if ( external[i].rel == 'stylesheet' )
-                stylesheets.appendChild(external[i])
+                stylesheets.appendChild(external[i]);
                 //stylesheets+='<link href="' + external[i].href + '" rel="stylesheet" />\n';
                 //;
         }
@@ -44,6 +45,7 @@ var importHtmlResource = (function(){
             else {
                 newScript.innerHTML = docScripts[i].innerHTML;
                 interalScripts.appendChild(newScript);
+                console.log("Forse qui?");
             }
         }
         var scripts = {
@@ -78,9 +80,9 @@ var importHtmlResource = (function(){
             insertScripts = function (){
                 if ( scripts.extLength == scriptLoaded )
                 {
-                    debugger;
                     document.body.appendChild(scripts.int);
                     frame.parentNode.removeChild(frame);
+                    this.loaded = true;
                 }
                 else
                     setTimeout( function(){ insertScripts() } );
@@ -93,4 +95,5 @@ var importHtmlResource = (function(){
     {
         bindResources( requires[i], requires[i].getAttribute('data-url') );
     }
-})();
+    return this;
+};

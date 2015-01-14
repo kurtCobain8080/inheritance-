@@ -2,8 +2,43 @@
  * Created by simone.dinuovo on 05/01/15.
  */
 var animation = function(tweening){
+    var undefined = undefined;
     var $self = this;
     var interpolation = {};
+    interpolation.settings = {};
+
+    for(var sets in $self.settings)
+        if ( tweening.pointA && tweening.pointA[sets] != undefined )
+            interpolation.settings[sets] = tweening.pointA[sets];
+        else
+            interpolation.settings[sets] = $self.settings[sets];
+
+    interpolation.update = function(timestamp,progress){
+        if ( interpolation.stop ) return;
+        if ( !tweening.cycle && interpolation.animationTime == 1  ) return;
+        interpolation.animationTime = interpolation.animationTime == 1 ? 0 : interpolation.animationTime;
+        var duration = interpolation.duration;
+        var amount = interpolation.animationTime == 0 && interpolation.endAnimation ? 0 : 1 / ( duration / progress );
+        interpolation.animationTime = ( interpolation.animationTime + amount ) > 1 ? 1 : (interpolation.animationTime + amount);
+        var tween = 0;
+        if (parameters.length)
+            tween = Bezier.cubicBezier(parameters[0],parameters[1],parameters[2],parameters[3],interpolation.animationTime,interpolation.duration);
+        else
+            tween = Bezier[animationType](interpolation.animationTime,interpolation.duration);
+        for ( var k in tweening.pointB )
+            $self.settings[k] = !interpolation.endAnimation ?  interpolation.settings[k] + ( tween * Number( tweening.pointB[k] ) ) :  interpolation.settings[k];
+
+        if ( tweening.name == 'true' ) console.log($self.settings[k]);
+        interpolation.endAnimation = !(interpolation.animationTime == 0 && interpolation.endAnimation);
+        if ( interpolation.animationTime == 1 && !tweening.cycle ) {
+            var newInterpolation = $self.timeline.getNextByIndex(tweening.index);
+            interpolation.remove();
+            $self.animation(newInterpolation);
+            return;
+        }
+
+        interpolation.endAnimation = interpolation.animationTime == 1;
+    };
     interpolation.duration = tweening.duration;
     interpolation.animationTime = 0;
     interpolation.stop = false;
@@ -16,7 +51,8 @@ var animation = function(tweening){
     interpolation.endAnimation = false;
     var animationType;
     var parameters = [];
-    switch ( tweening.transition.split('(')[0] )
+    var transitionType = tweening.transition.split('(')[0];
+    switch ( transitionType )
     {
         case 'cubic-bezier':
             animationType = 'cubicBezier';
@@ -39,30 +75,6 @@ var animation = function(tweening){
             break;
     };
     interpolation.transition.animationType = animationType;
-    interpolation.update = function(timestamp,progress,el){
-        /*console.log('\n $self.settings.name, progress,$self.settings.x');
-        console.log($self.settings.name, progress,$self.settings.x);*/
-        if ( interpolation.stop ) return;
-        if ( !tweening.cycle && interpolation.animationTime == 1  ) return;
-        var duration = interpolation.duration;
-        //console.log(duration);
-        var amount = interpolation.animationTime == 0 && interpolation.endAnimation ? 0 : 1 / ( duration / progress );
-        interpolation.endAnimation = !(interpolation.animationTime == 0 && interpolation.endAnimation);
-        interpolation.animationTime = ( interpolation.animationTime + amount ) > 1 ? 1 : (interpolation.animationTime + amount);
-        var tween = 0;
-        if (parameters.length)
-            tween = Bezier.cubicBezier(parameters[0],parameters[1],parameters[2],parameters[3],interpolation.animationTime,interpolation.duration);
-        else
-            tween = Bezier[animationType](interpolation.animationTime,interpolation.duration);
-        for ( var k in tweening.pointB )
-            $self.settings[k] = interpolation.endAnimation ? tweening.pointA[k] + ( tween * Number( tweening.pointB[k] ) ) : tweening.pointA[k];
-
-        /*console.log('\n$self.settings.name, parameters[0],parameters[1],parameters[2],parameters[3],interpolation.animationTime');
-        console.log($self.settings.name, parameters[0],parameters[1],parameters[2],parameters[3],interpolation.animationTime);
-        console.log($self.settings.name,tween);*/
-        interpolation.endAnimation = interpolation.animationTime == 1;
-        interpolation.animationTime = interpolation.animationTime == 1 ? 0 : interpolation.animationTime;
-    };
     var newAnimation = function(timestamp,progress,el){
         interpolation.update(timestamp,progress,el);
     }

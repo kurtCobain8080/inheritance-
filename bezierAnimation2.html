@@ -139,7 +139,7 @@
         width:500,
         height:0
     });
-    /*var rectangle = context.root.push(
+    var rectangle = context.root.push(
             Rectangle({
                 "context" : context,
                 "x" : 0,
@@ -165,7 +165,7 @@
                 "width" : 10,
                 "height" : 10
             })
-    );*/
+    );
 
     /**
      *
@@ -177,6 +177,7 @@
          * }}
      */
     var interpolation = {
+        'name' : 'prova',
         'transition' : 'cubic-bezier(0,0,1,1)',
         'duration' : 1000,
         'cycle' : true,
@@ -187,9 +188,7 @@
             'x' : 500
         }
     };
-    for ( var i = 0; i < 100; i++)
-    {
-    var animation = rectangle.timeline.addLabel('prova',interpolation);
+    var animation = rectangle.timeline.addLabel(interpolation);
     var durationInput = document.getElementById('duration');
     var tweening = rectangle.animation(animation);
     var tweening2 = rectangle2.animation(animation);
@@ -221,7 +220,6 @@
     function play(){
         context.play();
     };
-    }
 </script>
 </body>
 </html>

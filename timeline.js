@@ -4,19 +4,20 @@
 var timeline = function(el){
     var timeline = [];
     var undefined = undefined;
-    timeline.addLabel = function(label,options,position){
-        if ( position == undefined )
-            var record = ( this.push({}) ) - 1;
-        else
-            var record = this.splice(position,0,options);
+    timeline.addLabel = function(options,position){
 
-        this[record].label = label;
+        var record = 0;
+
+        if ( position == undefined )
+            record = ( this.push({}) ) - 1;
+        else
+            record = this.splice(position,0,options);
+
         this[record].index = record;
 
         for(var k in options)
             this[record][k] = options[k];
 
-        console.log('oi', label, options, position);
         return this[record];
     };
     timeline.removeLabel = function(pos){
@@ -34,10 +35,24 @@ var timeline = function(el){
             this.splice(count,1);
         }
     };
-    timeline.getElementByLabel = function(label){
+    timeline.getElementByName = function(name){
         var record = timeline.filter(function(element){
-            if ( element.label == label )
+            if ( element.name == name )
                 return element;
+        });
+        return record;
+    };
+    timeline.getNextByName = function(name){
+        var $self = this;
+        var record = timeline.filter(function(element){
+            console.log(element.name, name);
+            if ( element.name == name )
+            {
+                debugger;
+                var ind = $self.indexOf(element) + 1;
+                ind=ind<$self.length ? ind : false;
+                return ind
+            }
         });
         return record;
     };
@@ -47,7 +62,14 @@ var timeline = function(el){
                 return element;
         });
         return record;
-    }
+    };
+    timeline.getNextByIndex = function(index){
+        var next = index+1;
+        if ( next < this.length)
+            return timeline[next];
+        else
+            return timeline[0];
+    };
     return timeline;
 };
 
