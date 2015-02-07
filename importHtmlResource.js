@@ -2,7 +2,7 @@
  * Created by simone.dinuovo on 02/01/15.
  */
 
-var importHtmlResource = function(){
+var importHtmlResource = (function(){
     var requires = document.getElementsByClassName('importHtmlResource');
     this.loaded = false;
     var getStylesheets = function(doc){
@@ -45,7 +45,6 @@ var importHtmlResource = function(){
             else {
                 newScript.innerHTML = docScripts[i].innerHTML;
                 interalScripts.appendChild(newScript);
-                console.log("Forse qui?");
             }
         }
         var scripts = {
@@ -66,8 +65,9 @@ var importHtmlResource = function(){
         return body;
     }
     var bindResources = function(el, url){
-        var frame = document.createElement('frame');
+        var frame = document.createElement('iframe');
         frame.src = url;
+        frame.setAttribute('sandbox','allow-same-origin');
         frame.width = 0;
         frame.height = 0;
         document.body.appendChild(frame);
@@ -96,4 +96,4 @@ var importHtmlResource = function(){
         bindResources( requires[i], requires[i].getAttribute('data-url') );
     }
     return this;
-};
+})();

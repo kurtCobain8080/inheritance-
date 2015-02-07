@@ -34,7 +34,6 @@ var Rectangle = function(options){
     var $self = new canvasElementPrototype(settings);
     $self.settings = settings;
     $self.draw = function(){
-        settings.context.beginPath();
         if (settings.border != 'transparent') {
             settings.context.beginPath();
             settings.context.strokeStyle = settings.border;
