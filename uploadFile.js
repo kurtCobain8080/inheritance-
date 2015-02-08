@@ -11,9 +11,9 @@
 
  */
 var uploadFile = function(options){
-    var el = options.el;
-    var change = options.change;
-    var callback = options.callback;
+    var el = options.el || document.getElementsByTagName('input')[0];
+    var change = options.change || function(){};
+    var callback = options.callback || function(){};
     var $self = (function(){
         /**
          * @private

@@ -26,80 +26,96 @@
       <file leaf-file-name="canvasElement.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/canvasElement.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="19" column="0" selection-start="748" selection-end="748" vertical-scroll-proportion="0.0" vertical-offset="313" max-vertical-offset="1275">
+            <state line="51" column="79" selection-start="1971" selection-end="1971" vertical-scroll-proportion="0.0" vertical-offset="510" max-vertical-offset="1292">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="setCanvas.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/setCanvas.js">
+      <file leaf-file-name="gruntfile.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/gruntfile.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="92" column="4" selection-start="3317" selection-end="3331" vertical-scroll-proportion="0.0" vertical-offset="1564" max-vertical-offset="2159">
+            <state line="34" column="4" selection-start="1082" selection-end="1082" vertical-scroll-proportion="0.0" vertical-offset="288" max-vertical-offset="850">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="requestFrame.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/requestFrame.js">
+      <file leaf-file-name="Prova0.0.3.js" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/build/Prova0.0.3.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="8" column="8" selection-start="167" selection-end="167" vertical-scroll-proportion="0.0" vertical-offset="136" max-vertical-offset="782">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-8.453552" vertical-offset="4641" max-vertical-offset="9826">
+              <folding>
+                <element signature="n#!!doc" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="bower.json" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/bower.json">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="340">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="bezierAnimationProva.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/bezierAnimationProva.html">
+      <file leaf-file-name="package.json" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/package.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="17" column="5" selection-start="458" selection-end="458" vertical-scroll-proportion="0.0" vertical-offset="3347" max-vertical-offset="4522">
+            <state line="22" column="0" selection-start="433" selection-end="433" vertical-scroll-proportion="-14.384615" vertical-offset="0" max-vertical-offset="476">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="sprite.html" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/sprite.html">
+      <file leaf-file-name="image.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/image.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="67" column="36" selection-start="1446" selection-end="1446" vertical-scroll-proportion="0.0" vertical-offset="1139" max-vertical-offset="3485">
+            <state line="45" column="0" selection-start="2092" selection-end="2366" vertical-scroll-proportion="0.0" vertical-offset="675" max-vertical-offset="1428">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ui1.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/resources/ui1.html">
+      <file leaf-file-name="alphaCutterWorker.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/alphaCutterWorker.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="8" column="79" selection-start="436" selection-end="436" vertical-scroll-proportion="0.0" vertical-offset="136" max-vertical-offset="459">
+            <state line="7" column="18" selection-start="218" selection-end="218" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="221">
+              <folding>
+                <element signature="e#0#41#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="alphaCutter.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/alphaCutter.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="20" column="47" selection-start="706" selection-end="706" vertical-scroll-proportion="-13.076923" vertical-offset="0" max-vertical-offset="1003">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="timeline.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/timeline.html">
+      <file leaf-file-name="drawBorder.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/drawBorder.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="7" column="23" selection-start="92" selection-end="107" vertical-scroll-proportion="0.0" vertical-offset="119" max-vertical-offset="272">
+            <state line="10" column="0" selection-start="268" selection-end="365" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="408">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="canvasElementPrototype.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/canvasElementPrototype.js">
+      <file leaf-file-name="createWorker.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/createWorker.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="66" column="11" selection-start="2251" selection-end="2251" vertical-scroll-proportion="0.0" vertical-offset="1122" max-vertical-offset="1734">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="timeline.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/timeline.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="70" column="29" selection-start="1962" selection-end="1962" vertical-scroll-proportion="0.0" vertical-offset="801" max-vertical-offset="1547">
-              <folding />
+            <state line="23" column="10" selection-start="662" selection-end="662" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="595">
+              <folding>
+                <element signature="n#!!doc;n#createWorker#0" expanded="false" />
+                <marker date="1423425652556" expanded="true" signature="604:796" placeholder="{...}" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -114,36 +130,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/grid.js" />
-        <option value="$PROJECT_DIR$/trimSpritesheet.js" />
-        <option value="$PROJECT_DIR$/spriteInterface.js" />
-        <option value="$PROJECT_DIR$/circle.js" />
-        <option value="$PROJECT_DIR$/line.js" />
-        <option value="$PROJECT_DIR$/bezierCurveImpl.js" />
-        <option value="$PROJECT_DIR$/require.js" />
-        <option value="$PROJECT_DIR$/require.html" />
-        <option value="$PROJECT_DIR$/canvas.html" />
-        <option value="$PROJECT_DIR$/uploadFile.js" />
-        <option value="$PROJECT_DIR$/canvasElement.js" />
-        <option value="$PROJECT_DIR$/customEvent.html" />
-        <option value="$PROJECT_DIR$/createSprite.js" />
-        <option value="$PROJECT_DIR$/spriteSelection.js" />
-        <option value="$PROJECT_DIR$/package.json.js" />
-        <option value="$PROJECT_DIR$/build/Prova0.0.2.min.js" />
-        <option value="$PROJECT_DIR$/package.json" />
-        <option value="$PROJECT_DIR$/gruntfile.js" />
-        <option value="$PROJECT_DIR$/rectangle.js" />
-        <option value="$PROJECT_DIR$/bezierAnimation.html" />
-        <option value="$PROJECT_DIR$/objectArray.js" />
-        <option value="$PROJECT_DIR$/out/image.js.html" />
-        <option value="$PROJECT_DIR$/image.js" />
-        <option value="$PROJECT_DIR$/out/styles/jsdoc-default.css" />
-        <option value="$PROJECT_DIR$/bezierAnimation2.html" />
-        <option value="$PROJECT_DIR$/setCanvas.js" />
-        <option value="$PROJECT_DIR$/requestFrame.js" />
-        <option value="$PROJECT_DIR$/timeline.js" />
-        <option value="$PROJECT_DIR$/animation.js" />
-        <option value="$PROJECT_DIR$/bezierAnimationProva.html" />
         <option value="$PROJECT_DIR$/bezierCurve.js" />
         <option value="$PROJECT_DIR$/resources/ui1.html" />
         <option value="$PROJECT_DIR$/importHtmlResource.js" />
@@ -151,6 +137,15 @@
         <option value="$PROJECT_DIR$/canvasElementPrototype.js" />
         <option value="$PROJECT_DIR$/timeline.html" />
         <option value="$PROJECT_DIR$/sprite.html" />
+        <option value="$PROJECT_DIR$/rectangle.js" />
+        <option value="$PROJECT_DIR$/sdsds.js" />
+        <option value="$PROJECT_DIR$/uploadFile.js" />
+        <option value="$PROJECT_DIR$/alphaCutterWorker.js" />
+        <option value="$PROJECT_DIR$/alphaCutter.js" />
+        <option value="$PROJECT_DIR$/createWorker.js" />
+        <option value="$PROJECT_DIR$/alphaCutter.html" />
+        <option value="$PROJECT_DIR$/canvasElement.js" />
+        <option value="$PROJECT_DIR$/gruntfile.js" />
       </list>
     </option>
   </component>
@@ -201,7 +196,21 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="inheritance-" />
+              <option name="myItemId" value="inheritance" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="inheritance" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="inheritance" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="build" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -214,12 +223,12 @@
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="options.lastSelected" value="editor.preferences.appearance" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Documents/GitHub/HTMLWave/console/Console.js" />
+    <property name="SearchEverywhereHistory" value="" />
+    <property name="last_opened_file_path" value="C:/workspace/prospective/1.psd" />
     <property name="FullScreen" value="false" />
     <property name="DefaultHtmlFileTemplate" value="Html5" />
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
-    <property name="SearchEverywhereHistory" value="" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -271,15 +280,16 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="1" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="0" />
     <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32676518" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23645681" sideWeight="0.6715928" order="1" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23645681" sideWeight="0.6732348" order="1" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
@@ -288,7 +298,6 @@
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32704404" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
@@ -311,284 +320,126 @@
     <breakpoint-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/animation.js">
+    <entry file="file://$PROJECT_DIR$/createSprite.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="40" selection-start="913" selection-end="913" vertical-scroll-proportion="0.0" vertical-offset="255" max-vertical-offset="1411" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/rectangle.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="37" column="27" selection-start="1103" selection-end="1103" vertical-scroll-proportion="0.0" vertical-offset="629" max-vertical-offset="935" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bezierAnimation.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="40" column="21" selection-start="1496" selection-end="1496" vertical-scroll-proportion="0.0" vertical-offset="334" max-vertical-offset="2244" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bezierCurve.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="82" column="36" selection-start="2380" selection-end="2380" vertical-scroll-proportion="0.0" vertical-offset="1394" max-vertical-offset="2465" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/canvasElementPrototype.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="629" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/image.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="56" column="24" selection-start="2449" selection-end="2449" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1326" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/setCanvas.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="1" selection-start="534" selection-end="534" vertical-scroll-proportion="0.0" vertical-offset="323" max-vertical-offset="425">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="901">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/rectangle.js">
+    <entry file="file://$PROJECT_DIR$/sprite.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="27" selection-start="957" selection-end="957" vertical-scroll-proportion="0.0" vertical-offset="561" max-vertical-offset="867" />
+        <state line="40" column="0" selection-start="817" selection-end="909" vertical-scroll-proportion="61.76923" vertical-offset="2286" max-vertical-offset="3485">
+          <folding />
+        </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/circle.js">
+    <entry file="file://$PROJECT_DIR$/upload.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="153" max-vertical-offset="782" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/line.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="816" />
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="562">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/uploadFile.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="52" column="17" selection-start="1520" selection-end="1520" vertical-scroll-proportion="0.0" vertical-offset="193" max-vertical-offset="1003" />
+        <state line="15" column="36" selection-start="391" selection-end="391" vertical-scroll-proportion="0.0" vertical-offset="255" max-vertical-offset="1003">
+          <folding>
+            <element signature="n#!!doc" expanded="false" />
+          </folding>
+        </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/libs/angular.min.js">
+    <entry file="file://$PROJECT_DIR$/binarySearch.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4029" />
+        <state line="13" column="22" selection-start="305" selection-end="305" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="731">
+          <folding>
+            <element signature="e#0#41#0" expanded="false" />
+          </folding>
+        </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/libs/jquery-2.1.3.js">
+    <entry file="file://$PROJECT_DIR$/alphaCutter.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="80" column="9" selection-start="2100" selection-end="2105" vertical-scroll-proportion="0.0" vertical-offset="1360" max-vertical-offset="156587" />
+        <state line="92" column="47" selection-start="3713" selection-end="3713" vertical-scroll-proportion="0.0" vertical-offset="1104" max-vertical-offset="1666">
+          <folding />
+        </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/require.html">
+    <entry file="file://$PROJECT_DIR$/alphaCutterWorker.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="57" selection-start="114" selection-end="129" vertical-scroll-proportion="0.0" vertical-offset="102" max-vertical-offset="255" />
+        <state line="7" column="18" selection-start="218" selection-end="218" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="221">
+          <folding>
+            <element signature="e#0#41#0" expanded="false" />
+          </folding>
+        </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/createSprite.js">
+    <entry file="file://$PROJECT_DIR$/createWorker.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="33" column="63" selection-start="1396" selection-end="1396" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="901" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/spriteSelection.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="5" selection-start="850" selection-end="850" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="969" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/build/Prova0.0.2.min.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="1764" selection-start="1781" selection-end="1792" vertical-scroll-proportion="0.0" vertical-offset="17" max-vertical-offset="119" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/build/Prova0.0.3.min.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="0" selection-start="28" selection-end="28" vertical-scroll-proportion="0.0" vertical-offset="17" max-vertical-offset="153" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/packageExample.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="82" column="1" selection-start="2379" selection-end="2379" vertical-scroll-proportion="0.0" vertical-offset="1394" max-vertical-offset="1496" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="19" selection-start="66" selection-end="66" vertical-scroll-proportion="0.0" vertical-offset="51" max-vertical-offset="476" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gruntfile.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="75" selection-start="484" selection-end="484" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="561" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/build/Prova0.0.3.map">
-      <provider editor-type-id="sourcemapFileViewerProvider">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="551" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bezierAnimation.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="132" column="56" selection-start="5436" selection-end="5436" vertical-scroll-proportion="-30.115385" vertical-offset="1461" max-vertical-offset="3485" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../ANS_0002/aem-allin-ltm-designs/src/main/content/jcr_root/etc/designs/allin-ltm/clientlibs/registration/js/components/registration.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1370" column="0" selection-start="49990" selection-end="49990" vertical-scroll-proportion="0.8263889" vertical-offset="22814" max-vertical-offset="26197" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/objectArray.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="3" selection-start="3" selection-end="3" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="595" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/canvas.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="49" selection-start="967" selection-end="976" vertical-scroll-proportion="0.0" vertical-offset="315" max-vertical-offset="1071" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/npm-debug.log">
-      <provider editor-type-id="com.intellij.persistence.database.editor.CsvTableFileEditorProvider">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="799" />
+        <state line="23" column="10" selection-start="662" selection-end="662" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="595">
+          <folding>
+            <element signature="n#!!doc;n#createWorker#0" expanded="false" />
+            <marker date="1423425652556" expanded="true" signature="604:796" placeholder="{...}" />
+          </folding>
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/image.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="79" column="81" selection-start="3581" selection-end="3581" vertical-scroll-proportion="0.0" vertical-offset="236" max-vertical-offset="1428" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/extend.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="459" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/out/styles/jsdoc-default.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="0" selection-start="1" selection-end="57" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="7344" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/out/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1190" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/out/canvasElementPrototype.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="0" selection-start="16" selection-end="16" vertical-scroll-proportion="-0.43272728" vertical-offset="255" max-vertical-offset="9962" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bezierAnimation2.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="183" column="20" selection-start="6826" selection-end="6826" vertical-scroll-proportion="-5.230769" vertical-offset="2975" max-vertical-offset="3910" />
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Documents/GitHub/HTMLWave/console/Console.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-7.0868053" vertical-offset="4082" max-vertical-offset="5066" />
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/Documents/GitHub/HTMLWave/console/consoleProva.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-3.4085257" vertical-offset="1919" max-vertical-offset="2533" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bezier.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="214" column="14" selection-start="7309" selection-end="7315" vertical-scroll-proportion="-0.41426146" vertical-offset="3491" max-vertical-offset="4080" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/rectangle.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="19" selection-start="835" selection-end="845" vertical-scroll-proportion="0.0" vertical-offset="108" max-vertical-offset="901" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/animation.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="12" selection-start="1915" selection-end="1915" vertical-scroll-proportion="0.0" vertical-offset="172" max-vertical-offset="1564" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/requestFrame.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="8" selection-start="167" selection-end="167" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="782">
+        <state line="45" column="0" selection-start="2092" selection-end="2366" vertical-scroll-proportion="0.0" vertical-offset="675" max-vertical-offset="1428">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/setCanvas.js">
+    <entry file="file://$PROJECT_DIR$/alphaCutter.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="92" column="4" selection-start="3317" selection-end="3331" vertical-scroll-proportion="0.0" vertical-offset="1496" max-vertical-offset="2125">
+        <state line="20" column="47" selection-start="706" selection-end="706" vertical-scroll-proportion="-13.076923" vertical-offset="0" max-vertical-offset="1003">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/bezierCurveImpl.js">
+    <entry file="file://$PROJECT_DIR$/drawBorder.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="60" column="22" selection-start="3308" selection-end="3308" vertical-scroll-proportion="1.7317487" vertical-offset="0" max-vertical-offset="1700" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bezierCurve.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="73" column="72" selection-start="2654" selection-end="2654" vertical-scroll-proportion="0.0" vertical-offset="937" max-vertical-offset="3196" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/resources/ui1.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="79" selection-start="436" selection-end="436" vertical-scroll-proportion="0.0" vertical-offset="136" max-vertical-offset="459">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/importHtmlResource.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="19" selection-start="598" selection-end="598" vertical-scroll-proportion="0.634103" vertical-offset="0" max-vertical-offset="680" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/timeline.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="70" column="29" selection-start="1962" selection-end="1962" vertical-scroll-proportion="0.0" vertical-offset="721" max-vertical-offset="1547">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/canvasElementPrototype.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="66" column="11" selection-start="2251" selection-end="2251" vertical-scroll-proportion="0.0" vertical-offset="609" max-vertical-offset="1700">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bezierAnimationProva.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="5" selection-start="458" selection-end="458" vertical-scroll-proportion="0.0" vertical-offset="3347" max-vertical-offset="4522">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/timeline.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="23" selection-start="92" selection-end="107" vertical-scroll-proportion="0.0" vertical-offset="119" max-vertical-offset="272">
+        <state line="10" column="0" selection-start="268" selection-end="365" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="408">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/canvasElement.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="0" selection-start="748" selection-end="748" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1275">
+        <state line="51" column="79" selection-start="1971" selection-end="1971" vertical-scroll-proportion="0.0" vertical-offset="510" max-vertical-offset="1292">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/importHtmlResource.js">
+    <entry file="file://$PROJECT_DIR$/bower.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="97" column="16" selection-start="3655" selection-end="3655" vertical-scroll-proportion="1.2900208" vertical-offset="408" max-vertical-offset="1785" />
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="562">
+          <folding />
+        </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/sprite.html">
+    <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="67" column="36" selection-start="1446" selection-end="1446" vertical-scroll-proportion="0.0" vertical-offset="1139" max-vertical-offset="3485">
+        <state line="22" column="0" selection-start="433" selection-end="433" vertical-scroll-proportion="-14.384615" vertical-offset="0" max-vertical-offset="476">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gruntfile.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="34" column="4" selection-start="1082" selection-end="1082" vertical-scroll-proportion="0.0" vertical-offset="288" max-vertical-offset="850">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/build/Prova0.0.3.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-8.453552" vertical-offset="4641" max-vertical-offset="9826">
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

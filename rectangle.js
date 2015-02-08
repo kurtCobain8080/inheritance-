@@ -35,9 +35,15 @@ var Rectangle = function(options){
     $self.settings = settings;
     $self.draw = function(){
         if (settings.border != 'transparent') {
-            settings.context.beginPath();
+            /* TODO */
+/*            settings.context.beginPath();
             settings.context.strokeStyle = settings.border;
-            settings.context.strokeRect(settings.x-1,settings.y-1,settings.width+1,settings.height+1);
+            settings.context.strokeRect(settings.x-1,settings.y-1,settings.width+1,settings.height+1);*/
+            var storageLineWidth  = settings.context.lineWidth;
+            settings.context.lineWidth = borderValue;
+
+            settings.context.strokeStyle = settings.border;
+            settings.context.strokeRect(settings.x,settings.y,settings.width,settings.height);
         }
         if (settings.background != 'transparent') {
             settings.context.beginPath();

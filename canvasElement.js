@@ -40,16 +40,17 @@ function CanvasElement(options){
     var settings = extend(defaults,options);
     var $self = new canvasElementPrototype(settings);
     $self.settings = settings;
+    if(settings.border) var bordersValues = settings.border.split(" ");
     $self.draw = function(){
         var ctx = settings.context;
         var repeat = settings['background-repeat'] ? settings['background-repeat'] : 'repeat';
         var pat = settings["background-image"] ? ctx.createPattern(settings["background-image"],repeat) : null;
         if ( settings.border ){
-            ctx.beginPath();
-            ctx.lineWidth = settings.border;
-            ctx.strokeStyle = settings["border-color"];
-            ctx.rect(settings.x-settings.border,settings.y-settings.border,settings.width+settings.border,settings.height+settings.border);
-            ctx.stroke();
+            var storageLineWidth = ctx.lineWidth;
+            ctx.lineWidth = bordersValues[0];
+            ctx.strokeStyle = bordersValues[1];
+            ctx.strokeRect(settings.x,settings.y,settings.width,settings.height);
+            ctx.lineWidth = storageLineWidth;
         }
         ctx.beginPath();
         ctx.rect(settings.x,settings.y,settings.width,settings.height);

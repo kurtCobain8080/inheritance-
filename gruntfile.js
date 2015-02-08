@@ -18,13 +18,28 @@ module.exports = function(grunt) {
                 src: '<%= files %>',
                 dest: "build/<%= pkg.name %><%= pkg.version %>.min.js"
             }
+        },
+        concat: {
+            options: {
+                stripBanners: true,
+                banner: "/*! <%= pkg.name %> - v<%= pkg.version %> - <%= grunt.template.today('yyyy-mm-dd') %> */\n"
+            },
+            dist: {
+                src: '<%= files %>',
+                dest: "build/<%= pkg.name %><%= pkg.version %>.js"
+            }
         }
     });
 
     // Load the plugin that provides the "uglify" task.
-    grunt.loadNpmTasks('grunt-contrib-uglify');
+    if ( !grunt.option('no-uglify') )
+        var tasks = ['grunt-contrib-uglify','uglify'];
+    else
+        var tasks = ['grunt-contrib-concat','concat'];
+
+    grunt.loadNpmTasks(tasks[0]);
 
     // Default task(s).
-    grunt.registerTask('default', ['uglify']);
+    grunt.registerTask('default', [tasks[1]]);
 
 };

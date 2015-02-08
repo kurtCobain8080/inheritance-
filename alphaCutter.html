@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AlphaCutter</title>
+</head>
+<body>
+<input type="file" multiple="multiple" id="UploadInput" value="" placeholder="Carica File"/>
+<canvas id="alphaCutter"></canvas>
+<script src="uploadFile.js"></script>
+<script src="alphaCutter.js"></script>
+<script src="createWorker.js"></script>
+<script src="alphaCutterWorker.js"></script>
+<script>
+var canvas = document.getElementById('alphaCutter');
+var ctx = canvas.getContext("2d");
+var drawIntersection = function(alphaCutters){
+    ctx.lineWidth = 2;
+    for(var paths in alphaCutters){
+        ctx.strokeStyle = "black";
+        ctx.strokeRect(alphaCutters[paths].vertexs[0],
+                alphaCutters[paths].vertexs[1],
+                alphaCutters[paths].vertexs[2],
+                alphaCutters[paths].vertexs[3]);
+    }
+};
+uploadFile({
+    el : document.getElementById('UploadInput'),
+    callback : function(procImg){
+        var fakeCanvas = document.createElement('canvas');
+        fakeCanvas.width = procImg.naturalWidth;
+        fakeCanvas.height = procImg.naturalHeight;
+        fakeCanvas.getContext("2d").drawImage(procImg,0,0,fakeCanvas.width,fakeCanvas.height);
+        var imgData = fakeCanvas.getContext("2d").getImageData(0,0,fakeCanvas.width,fakeCanvas.height);
+        var aC = alphaCutter(imgData);
+        var counter = 0;
+        var w = createWorker('alphaCutterWorker.js',{imgData:imgData},function(data){
+            aC = data;
+            console.log(aC);
+            for(var paths in aC ){
+                console.log('The rectangle slice "' + paths + '" has x1 in ',aC[paths].vertexs[0],'and y1 in ', aC[paths].vertexs[1]);
+                console.log('\nHas width equal to ',aC[paths].vertexs[2],' and height equal ', aC[paths].vertexs[3]);
+            };
+            w.stopWorker();
+            canvas.width = procImg.naturalWidth;
+            canvas.height = procImg.naturalHeight;
+            ctx.drawImage(procImg,0,0);
+            drawIntersection(aC);
+        });
+
+    }
+})
+</script>
+</body>
+</html>
