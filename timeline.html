@@ -2,10 +2,73 @@
 <html>
 <head>
     <title></title>
+    <style>
+        #timeline{
+            float:left;
+            clear:both;
+            font-family:Arial, Helvetica, sans-serif;
+            font-size:12px;
+            font-weight:bold;
+        }
+        #timeline ul{
+            list-style:none;
+            margin:0;padding:0;
+        }
+        #timeline li{
+            float:left;
+            border-top:1px solid #ccc;
+            border-bottom:1px solid #ccc;
+            border-right:1px solid #ccc;
+            background-color:#ffffc0;
+            color:#555;
+            padding:5px 14px 5px 4px;
+        }
+        #timeline li:hover{
+            cursor:pointer;
+            text-decoration:underline;
+        }
+        #timeline li:first-child{
+            border-left:1px solid #ccc;
+        }
+    </style>
 </head>
 <body>
-<ul id="timeline">
-    <li contenteditable></li>
-</ul>
+<div id="timeline">
+</div>
+<script src="timeline.js"></script>
+<script src="timelineGUI.js"></script>
+<script src="framesListener/framesListener.js"></script>
+<script>
+    /*
+    var x = { 'name' : 'prova'};
+    var y = { 'name' : 'prova2'};
+    timelineX = timeline(x);
+    timelineY = timeline(y);
+    timelineX.addLabel(x);
+    timelineY.addLabel(x);
+    timelineY.addLabel(y);
+    var x = timelineImpl(timelineY,function(e){
+        console.log(e);
+    });
+    document.getElementById('timeline').appendChild(x);
+    console.log(x);
+    */
+    framesListener.listen('timeline',function(data, src){
+        console.log(src===window.parent);
+        var x = timelineImpl(data.data.data,function(e,ee){
+            console.log(e);
+            console.log(ee.target||ee.srcElement);
+        },function(nodeNumber, elText){
+            var data = {
+                message : 'timeline',
+                "nodeNumber" : nodeNumber,
+                "text" : elText
+            };
+            framesListener.send(src,data);
+        });
+        document.getElementById('timeline').appendChild(x);
+        console.log(x);
+    });
+</script>
 </body>
 </html>

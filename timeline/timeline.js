@@ -8,7 +8,7 @@ var timeline = function(el){
 
         var record = 0;
 
-        if ( position == undefined  || this[position] == undefined )
+        if ( position == undefined )
             record = ( this.push({}) ) - 1;
         else
             record = this.splice(position,0,options);

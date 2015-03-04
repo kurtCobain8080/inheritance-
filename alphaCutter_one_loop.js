@@ -5,17 +5,36 @@
  *
  * @param imgData {Uint8ClampedArray} - image bitmap data
  * @param colorCut {array of four integers} - color to cut from the background. Default alpha(0);
- * @param callback {function} - news from the process are passed to this function
  * @returns cutters {array} - rectangles founds in vertex
  */
-var alphaCutter = function(imgData,colorCut, callback){
+var alphaCutter = function(imgData,colorCut){
     var cutters = [];
     var imageWidth = imgData.width*4;
     var imageHeight = imgData.height;
     var data = imgData.data;
     var dataLength = data.length;
     //var pixelTrim = new Uint8ClampedArray(data.length/4);
-    var x,y;
+    function binarySearch(arr, val) {
+        // given that arr is sorted,
+        // find i for which arr[i] == val
+        // if it doesn't exist, return -1
+
+        start = 0;
+        end = arr.length - 1;
+
+        while(end >= start) {
+            midptidx = Math.floor((start+end)/2);
+            midptval = arr[midptidx];
+            if(midptval === val) {
+                return midptidx;
+            } else if(midptval > val) {
+                end = midptidx - 1;
+            } else {
+                start = midptidx + 1;
+            }
+        }
+        return -1;
+    }
     // analyze every 'valid' pixel to check if has 'valid' pixel in its boundaries
     var path = function(){
         this.x = xx = [];
@@ -24,24 +43,24 @@ var alphaCutter = function(imgData,colorCut, callback){
         this.vertexs = vertex = []; // x1,y1,width,height
 
         this.push = function(n){
-            x =  Math.floor( n % (imageWidth/4) );
-            y = Math.floor( n/(imageWidth/4) );
-            if( points.indexOf([x,y]) > -1 ) return;
-            //if( binarySearch(points,[x,y]) > -1 ) return;
+            var x = n%(imageWidth/4);
+            var y = Math.floor( n/(imageWidth/4) );
+            //if( points.indexOf([x,y]) > -1 ) return;
+            if( binarySearch(points,[x,y]) > -1 ) return;
             points[points.length] = [x,y];
             xx[xx.length] = x ;
             yy[yy.length] = y ;
         };
     };
-    /*var pushPath = function(innerPath,n){
-        var x = n & ((imageWidth/4)-1);
+    var pushPath = function(innerPath,n){
+        var x = n%(imageWidth/4);
         var y = Math.floor( n/(imageWidth/4) );
         //if( points.indexOf([x,y]) > -1 ) return;
         if( binarySearch(innerPath.points, [x,y] ) > -1 ) return;
         innerPath.points[innerPath.points.length] = [x,y];
         innerPath.x[innerPath.x.length] = x ;
         innerPath.y[innerPath.y.length] = y ;
-    }*/
+    }
 
     function pushPixel(pixelPositionAlpha){
         // imageWidth = imageWidth * 4;
@@ -51,7 +70,7 @@ var alphaCutter = function(imgData,colorCut, callback){
         //       pixelPosition - 4         |     pixelPosition          | pixelPostition + 4
         // ---------------------------------------------------------------------------------------------
         // pixelPosition + imageWidth - 4  | pixelPosition + imageWidth | pixelPosition + imageWidth + 4
-        var px = Math.floor(pixelPositionAlpha/4);
+        var px = (pixelPositionAlpha/4)|0;
         cutters[paths].push(px);
         //pushPath(cutters[paths],pixelPositionAlpha);
         data[pixelPositionAlpha] = 0;
@@ -74,20 +93,10 @@ var alphaCutter = function(imgData,colorCut, callback){
     }
     // retrieve 'valid' pixels ( differents from background - check if colorCut variable is undefined )
     var paths = 0;
-    callback('initialized',{});
-    var counter = 0.05;
     if ( typeof colorCut === 'undefined' )
     {
         for(var i=0;i<dataLength;i+=4)
         {
-            if( i>=Math.floor(dataLength*counter)-3 && i<=Math.floor(dataLength*counter)+3 )
-            {
-                callback( (counter*100),{});
-                //counter= Math.abs( -(counter + 0.05).toFixed(2) );
-                counter = (counter * 100 + 0.05 * 100) / 100;
-                //counter+=0.05;
-            }
-
             if ( data[i+3] )
             {
                 cutters[paths] = new path();
@@ -111,6 +120,6 @@ var alphaCutter = function(imgData,colorCut, callback){
      else
      pixelTrim[i/4] = 1;
      }*/
-    callback( 100,{});
+
     return JSON.parse(JSON.stringify(cutters));
 };

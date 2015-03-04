@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<canvas width="256" height ="256" id="canvas"></canvas>
+<img src="images/runningGrantMin.png" id="image"/>
+<script>
+    var canvas = document.getElementById('canvas');
+    var canvasWidth  = canvas.width;
+    var canvasHeight = canvas.height;
+    var ctx = canvas.getContext('2d');
+    var image = document.getElementById('image');
+    ctx.drawImage(image,0,0)
+    var imageData = ctx.getImageData(0, 0, canvasWidth, canvasHeight);
+
+    var buf = new ArrayBuffer(imageData.data.length);
+    var buf8 = new Uint8ClampedArray(buf);
+    var data = new Uint32Array(imageData.data);
+    debugger;
+    for(var i = 0;i<data.length;i++){
+
+        console.log(data);
+    }
+    // Determine whether Uint32 is little- or big-endian.
+    /*data[1] = 0x0a0b0c0d;
+
+    var isLittleEndian = true;
+    if (buf[4] === 0x0a && buf[5] === 0x0b && buf[6] === 0x0c &&
+            buf[7] === 0x0d) {
+        isLittleEndian = false;
+    }
+
+    if (isLittleEndian) {
+        for (var y = 0; y < canvasHeight; ++y) {
+            for (var x = 0; x < canvasWidth; ++x) {
+                var value = x * y & 0xff;
+                console.log(x,y,value);
+                data[y * canvasWidth + x] =
+                        (255   << 24) |    // alpha
+                                (value << 16) |    // blue
+                                (value <<  8) |    // green
+                                value;            // red
+            }
+        }
+    } else {
+        for (y = 0; y < canvasHeight; ++y) {
+            for (x = 0; x < canvasWidth; ++x) {
+                value = x * y & 0xff;
+                console.log(value);
+                data[y * canvasWidth + x] =
+                        (value << 24) |    // red
+                                (value << 16) |    // green
+                                (value <<  8) |    // blue
+                                255;              // alpha
+            }
+        }
+    }*/
+
+    imageData.data.set(buf8);
+
+    ctx.putImageData(imageData, 0, 0);
+</script>
+</body>
+</html>

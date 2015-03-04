@@ -2,25 +2,144 @@
 <html>
 <head>
     <title>AlphaCutter</title>
+    <style>
+        canvas{
+            float:left;
+            clear:both;
+        }
+        .crosshair *:not('input, button'){
+            cursor:crosshair;
+        }
+        .documentSelectionEl{
+            background-color:cyan;
+            opacity:0.3;
+            border:1px solid #000;
+            position:absolute;
+            z-index:10000;
+            cursor:crosshair;
+        }
+        #top{
+            float:left;
+            clear:both;
+        }
+        #timeline{
+            float:left;
+            clear:both;
+            width:100%;
+        }
+        #timeline iframe{
+            width:100%;
+            height:40px;
+            border:0;
+        }
+    </style>
 </head>
 <body>
-<input type="file" multiple="multiple" id="UploadInput" value="" placeholder="Carica File"/>
+
+<div id="top">
+    <input type="file" multiple="multiple" id="UploadInput" value="" placeholder="Carica File"/>
+</div>
+<div id="timeline">
+    <iframe id="timelineFrame" src="timeline.html"></iframe>
+</div>
+<button id="divide" disabled="true">DIVIDE</button>
 <canvas id="alphaCutter"></canvas>
+
+<!-- utils or commons scripts -->
+<script src="extend.js"></script>
+<script src="offset.js"></script>
+<script src="timeline.js"></script>
+<script src="bezier.js"></script>
+<script src="animation.js"></script>
+<script src="intersection.js"></script>
+<script src="printObj.js"></script>
+<script src="requestFrame.js"></script>
 <script src="uploadFile.js"></script>
-<script src="alphaCutter.js"></script>
+<script src="documentSelection.js"></script>
 <script src="createWorker.js"></script>
-<script src="alphaCutterWorker.js"></script>
+<script src="spriteSelection.js"></script>
+<script src="createSpriteInterface.js"></script>
+<script src="framesListener/framesListener.js"></script>
+
+<!-- setCanvas library -->
+<script src="setCanvas.js"></script>
+<script src="canvasElementPrototype.js"></script>
+<script src="image.js"></script>
+<script src="canvasElement.js"></script>
 <script>
-var canvas = document.getElementById('alphaCutter');
-var ctx = canvas.getContext("2d");
+var context = setCanvas({ el : document.getElementById('alphaCutter')} );
+var currentSelection = spriteSelection(context);
+context.updates.push(function(){
+    if ( currentSelection.elements.length == 1 )
+        buttonDivide.disabled = false;
+    else
+        buttonDivide.disabled = true;
+});
+var buttonDivide = document.getElementById("divide");
+buttonDivide.addEventListener('click',function(e){
+    var sel = documentSelection(function(x1,y1,width,height){
+        sel.stop();
+        var id = currentSelection.elements[0];
+        x1 = x1 - context.leftEl;
+        y1 = y1 - context.topEl;
+        width = width;
+        height = height;
+        var x11 = context.root[id].settings.x;
+        var y11 = context.root[id].settings.y;
+        var x2 = x1+width;
+        var y2 = y1+height;
+        var x22 = x11 + context.root[id].settings.width;
+        var y22 = y11 + context.root[id].settings.height;
+        var intersection = Intersection.intersectRectangleRectangle(new Point2D(x11,y11),new Point2D(x22,y22),new Point2D(x1,y1),new Point2D(x2,y2));
+        if ( intersection.points.length == 2)
+        {
+            //createSpriteElements(context,currentSelection,0,[ {vertexs : [ intersection.points[0].x-2, intersection.points[0].y + 2, 4, 4]} ] );
+            //createSpriteElements(context,currentSelection,0,[ {vertexs : [ intersection.points[1].x-2, intersection.points[1].y + 2, 4, 4]} ] );
+            if (intersection.points[0].y == intersection.points[1].y)
+            {
+                var diffHeight1 = intersection.points[0].y - y11;
+                var diffHeight2 = y22- intersection.points[1].y;
+                var yNewPath2 = intersection.points[0].y;
+                var fakePath1 = [ {vertexs : [ x11, y11, context.root[id].settings.width, diffHeight1 ]} ];
+                var fakePath2 = [{vertexs : [ x11, yNewPath2, context.root[id].settings.width,diffHeight2]}];
+                createSpriteElements(context,currentSelection,0,fakePath1 );
+                createSpriteElements(context,currentSelection,0,fakePath2 );
+                currentSelection.remove(context.root[id]);
+                context.root.remove(id);
+            }
+             /*var point1x = intersection.points[0].x - x11;
+            var point1y = intersection.points[0].y - y11;
+            var point2x = intersection.points[1].x;
+            var point2y = intersection.points[1].y;
+            var fakePath1 = [ {vertexs : [ x11, y11, point1x, point1y ]} ];
+            var fakePath2 = [{vertexs : [ point2x, point2y, context.root[id].settings.width, context.root[id].settings.height]}];
+            createSpriteElements(context,currentSelection,0,fakePath1 );
+            createSpriteElements(context,currentSelection,0,fakePath2 );
+            currentSelection.remove(context.root[id]);
+            context.root.remove(id);*/
+        }
+    });
+},false);
+var selectSprite_Class = {
+    "background-color" : "cyan",
+    "opacity" : 0.4,
+    "name" : "selectSprite_Class"
+};
+interpolation = {
+    'name' : 'move1',
+    'transition' : 'cubic-bezier(0,0,1,1)',
+    'duration' : 400,
+    'cycle' : false,
+    'CSSLike' : true,
+    'pointB' : {
+        'x' : 117
+    }
+};
 var drawIntersection = function(alphaCutters){
-    ctx.lineWidth = 2;
     for(var paths in alphaCutters){
-        ctx.strokeStyle = "black";
-        ctx.strokeRect(alphaCutters[paths].vertexs[0],
-                alphaCutters[paths].vertexs[1],
-                alphaCutters[paths].vertexs[2],
-                alphaCutters[paths].vertexs[3]);
+        (function(){
+            createSpriteElements(context, currentSelection, paths,alphaCutters)
+        })(paths);
     }
 };
 uploadFile({
@@ -31,19 +150,55 @@ uploadFile({
         fakeCanvas.height = procImg.naturalHeight;
         fakeCanvas.getContext("2d").drawImage(procImg,0,0,fakeCanvas.width,fakeCanvas.height);
         var imgData = fakeCanvas.getContext("2d").getImageData(0,0,fakeCanvas.width,fakeCanvas.height);
-        var aC = alphaCutter(imgData);
+        var aC;
         var counter = 0;
+        // start timer
+        console.time("DOM update");
         var w = createWorker('alphaCutterWorker.js',{imgData:imgData},function(data){
-            aC = data;
-            console.log(aC);
-            for(var paths in aC ){
+            if(data.resultDescription != 'finished' && data.resultDescription != 'error')
+            {
+                console.log( ( data.resultDescription|0 ) + '% done');
+                return;
+            }
+            else if ( data.resultDescription == 'error' )
+            {
+                console.log('error -->', data.message.description);
+                console.log('\n Stack --->', data.message.stack);
+                return;
+            }
+            console.timeEnd("DOM update");
+            aC = data.message;
+            //console.log(aC);
+            /*for(var paths in aC ){
                 console.log('The rectangle slice "' + paths + '" has x1 in ',aC[paths].vertexs[0],'and y1 in ', aC[paths].vertexs[1]);
                 console.log('\nHas width equal to ',aC[paths].vertexs[2],' and height equal ', aC[paths].vertexs[3]);
+            };*/
+            w.stopWorker(w.w);
+            context.canvas.width = procImg.naturalWidth;
+            context.canvas.height = procImg.naturalHeight;
+           // context.drawImage(procImg,0,0);
+            var imageContx = context.root.push(
+                    CanvasImage({
+                        "context" : context,
+                        "img" : procImg,
+                        "name" : "image0"
+                    })
+            );
+            var msgData = {
+                'message' : 'timeline',
+                'data' : imageContx.timeline
             };
-            w.stopWorker();
-            canvas.width = procImg.naturalWidth;
-            canvas.height = procImg.naturalHeight;
-            ctx.drawImage(procImg,0,0);
+            var eventSource = document.getElementById('timelineFrame').contentWindow;
+            framesListener.send(eventSource, JSON.parse(JSON.stringify(msgData)));
+            framesListener.listen('timeline',function(data, source){
+                if ( eventSource !== source ) return;
+                if ( typeof imageContx.timeline[data.data.nodeNumber] === 'undefined' )
+                    imageContx.timeline.addLabel({'name' : data.data.text}, data.data.nodeNumber);
+                else
+                    imageContx.timeline[data.data.nodeNumber].name = data.data.text;
+
+            });
+            console.log(context.root.image0);
             drawIntersection(aC);
         });
 

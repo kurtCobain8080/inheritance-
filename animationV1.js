@@ -6,17 +6,12 @@ var animation = function(tweening){
     var $self = this;
     var interpolation = {};
     interpolation.settings = {};
-    interpolation.pointB = {};
 
-    for(var sets in tweening.pointB)
-    {
+    for(var sets in $self.settings)
+        if ( tweening.pointA && tweening.pointA[sets] != undefined )
+            interpolation.settings[sets] = tweening.pointA[sets];
+        else
             interpolation.settings[sets] = $self.settings[sets];
-            if(tweening.CSSLike)
-                interpolation.pointB[sets] = tweening.pointB[sets] - $self.settings[sets];
-            else
-                interpolation.pointB[sets] = tweening.pointB[sets];
-
-    }
 
     interpolation.duration = tweening.duration;
     interpolation.animationTime = 0;
@@ -27,7 +22,7 @@ var animation = function(tweening){
     interpolation.transition = {
         parameters : []
     };
-    interpolation.endAnimation = true;
+    interpolation.endAnimation = false;
     var animationType;
     var parameters = [];
     var transitionType = tweening.transition.split('(')[0];
@@ -68,7 +63,7 @@ var animation = function(tweening){
         else
             tween = Bezier[animationType](interpolation.animationTime,interpolation.duration);
         for ( var k in tweening.pointB )
-            $self.settings[k] = !interpolation.endAnimation ?  interpolation.settings[k] + ( tween * Number( interpolation.pointB[k] ) ) :  interpolation.settings[k];
+            $self.settings[k] = !interpolation.endAnimation ?  interpolation.settings[k] + ( tween * Number( tweening.pointB[k] ) ) :  interpolation.settings[k];
 
         if ( tweening.name == 'true' ) console.log($self.settings[k]);
         interpolation.endAnimation = !(interpolation.animationTime == 0 && interpolation.endAnimation);

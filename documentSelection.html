@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <style>
+        canvas{
+            float:left;
+            clear:both;
+        }
+        .documentSelectionEl{
+            background-color:cyan;
+            opacity:0.3;
+            border:1px solid #000;
+            position:absolute;
+            z-index:10000;
+            cursor:crosshair;
+        }
+    </style>
+</head>
+<body>
+<script src="documentSelection.js"></script>
+<script>
+    var sel = documentSelection(function(x,y,width,height){
+        console.log(x,y,width,height);
+        //sel.stop();
+    });
+</script>
+</body>
+</html>

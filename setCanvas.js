@@ -28,18 +28,18 @@ function setCanvas(options){
         height : null,
         update : function(){},
         postRender : function(){}
-    }
+    };
     var settings = extend(defaults,options);
     var context = settings.el.getContext("2d");
     context.updates = [settings.update];
     context.update = function(timestamp, progress){
         for(var i = 0;i<context.updates.length;i++)
             context.updates[i](timestamp, progress);
-    }
+    };
     context.settings = settings;
     var viewportOffset = offset(settings.el);
-    context.topEl = viewportOffset.top;
-    context.leftEl = viewportOffset.left;
+    context.topEl = Math.floor( viewportOffset.top );
+    context.leftEl = Math.floor( viewportOffset.left );
     context.canvas.width = settings.width ||  context.canvas.width;
     context.canvas.height = settings.height ||  context.canvas.height;
     context.elements = [];
@@ -90,20 +90,30 @@ function setCanvas(options){
         }
     };
     var stop = false;
+    var windowWidth = window.innerWidth;
     context.frames = requestFrame(function(timestamp, progress){
         if ( stop ) return;
+        if ( windowWidth && windowWidth != window.innerWidth ) // detecting zoom
+        {
+            console.log('zoom || resize!');
+            var viewportOffset = offset(settings.el);
+            context.topEl = Math.floor( viewportOffset.top );
+            context.leftEl = Math.floor( viewportOffset.left );
+            windowWidth = window.innerWidth;
+        }
         context.update(timestamp, progress);
         context.clearRect(0,0,context.canvas.width,context.canvas.height);
-        for(var k in context.root)
+        var contextLength = context.elements.length;
+        for(var k=0;k<contextLength;k++)
         {
-            if ( typeof context.root[k].draw !== 'undefined' )
+            if ( typeof context.elements[k].draw !== 'undefined' )
             {
-                if ( typeof context.root[k].update !== 'undefined' )
-                    context.root[k].update(timestamp, progress,context.root[k]);
+                if ( typeof context.elements[k].update !== 'undefined' )
+                    context.elements[k].update(timestamp, progress,context.elements[k]);
 
-                context.root[k].draw();
-                if ( typeof context.root[k].postRender !== 'undefined' )
-                    context.root[k].postRender(timestamp, progress,context.root[k]);
+                context.elements[k].draw();
+                if ( typeof context.elements[k].postRender !== 'undefined' )
+                    context.elements[k].postRender(timestamp, progress,context.elements[k]);
             }
         }
         context.settings.postRender(timestamp, progress);

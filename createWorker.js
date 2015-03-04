@@ -2,13 +2,13 @@
  * Created by Simone on 08/02/15.
  */
 function createWorker(worker,data,callback){
-    var w;
+    var $self = {};
     function startWorker() {
         if(typeof(Worker) !== "undefined") {
-            if(typeof(w) === "undefined") {
-                w = new Worker(worker);
-                w.postMessage(data);
-                w.onmessage = function(event) {
+            if(typeof($self.w) === "undefined") {
+                $self.w = new Worker(worker);
+                $self.w.postMessage(data);
+                $self.w.onmessage = function(event) {
                     callback(event.data);
                 };
             }
@@ -19,10 +19,8 @@ function createWorker(worker,data,callback){
     }
     startWorker();
     return{
-        w : function(){
-            return w;
-        },
-        stopWorker:function(){
+        w : $self.w,
+        stopWorker:function(w){
             w.terminate();
             w = undefined;
         },

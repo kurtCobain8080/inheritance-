@@ -2,6 +2,8 @@
  * Created by Simone on 27/12/14.
  */
 /**
+ * @requires <timeline.js>
+ * @requires <animation.js>
  * @class canvasElementPrototype
  * @description prototype with inner functions and property shared by the canvas objects.
  * @param settings {object} - an object representing the property of a canvas object
@@ -15,6 +17,33 @@ function canvasElementPrototype(settings){
      */
     var events = [];
     var $self = this;
+    this.classes = {};
+    this.id = settings.name;
+    var originalSettings = settings;
+    this.addClass = function(Class){
+        $self.classes[Class.name] = {};
+        for(var k in Class)
+            if(k != "name")
+            {
+                $self.classes[Class.name][k] = $self.settings[k];
+                $self.settings[k] = Class[k];
+            }
+    };
+    this.removeClass = function(Class){
+        var className = Class.name;
+        for(var k in Class)
+            if(k != "name")
+                $self.settings[k] = $self.classes[className][k];
+
+        delete $self.classes[className];
+    };
+    this.toggleClass = function(Class){
+        var className = Class.name;
+        if ( $self.classes[className] )
+            this.removeClass(Class);
+        else
+            this.addClass(Class);
+    };
     /**
      * @public
      * @function on - push events on the inner events array, do interpolation with a rectangle or a circle
@@ -27,14 +56,15 @@ function canvasElementPrototype(settings){
         function action(e){
             var x = e.pageX - settings.context.leftEl;
             var y = e.pageY - settings.context.topEl;
+            var point1;
             settings.context.beginPath();
-            if ( settings.ray == undefined )
-                var point1 = settings.context.rect(settings.x,settings.y,settings.width,settings.height);
-            else
-                var point1 = settings.context.arc(settings.x, settings.y, settings.ray, 0, 2 * Math.PI, false);
+            if ( settings.ray == undefined ) // for squares
+                point1 = settings.context.rect(settings.x,settings.y,settings.width,settings.height);
+            else // for circles
+                point1 = settings.context.arc(settings.x, settings.y, settings.ray, 0, 2 * Math.PI, false);
 
             if ( settings.context.isPointInPath(x,y) ){
-                callback(e, x, y);
+                callback(e, x, y, $self);
             }
 
         }

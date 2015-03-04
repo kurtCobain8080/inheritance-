@@ -9,7 +9,7 @@
 /**
  * canvas image prototype
  * numbers should be integers ( otherwise, performance could be slower )
- * @requires <extend.js>
+ * @requires <canvasElementPrototype.js>
  * @param {Object} options {
      * @param context {CanvasRenderingContext2D} - Specifies the image, canvas, or video element to use
      * @param x {int|number} - The x coordinate where to place the image on the canvas
@@ -46,19 +46,23 @@ function CanvasElement(options){
         var repeat = settings['background-repeat'] ? settings['background-repeat'] : 'repeat';
         var pat = settings["background-image"] ? ctx.createPattern(settings["background-image"],repeat) : null;
         if ( settings.border ){
+            ctx.beginPath();
             var storageLineWidth = ctx.lineWidth;
             ctx.lineWidth = bordersValues[0];
             ctx.strokeStyle = bordersValues[1];
             ctx.strokeRect(settings.x,settings.y,settings.width,settings.height);
+            // resets
             ctx.lineWidth = storageLineWidth;
         }
         ctx.beginPath();
         ctx.rect(settings.x,settings.y,settings.width,settings.height);
         if ( settings.opacity ) ctx.globalAlpha = settings.opacity;
-        ctx.fillStyle = settings["background-color"];
-        if ( ctx.fillStyle ) ctx.fill();
-        ctx.fillStyle=pat;
-        if ( ctx.fillStyle ) {
+        if ( settings["background-color"] ){
+            ctx.fillStyle = settings["background-color"];
+            ctx.fill();
+        }
+        if ( pat ) {
+            ctx.fillStyle=pat;
             ctx.save();
             ctx.translate(settings.x,settings.y);
             ctx.fill();

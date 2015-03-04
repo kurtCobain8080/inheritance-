@@ -67,7 +67,7 @@ var importHtmlResource = (function(){
     var bindResources = function(el, url){
         var frame = document.createElement('iframe');
         frame.src = url;
-        frame.setAttribute('sandbox','allow-same-origin');
+        //frame.setAttribute('sandbox','allow-same-origin');
         frame.width = 0;
         frame.height = 0;
         document.body.appendChild(frame);

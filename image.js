@@ -21,7 +21,7 @@
  * @returns {canvasElementPrototype}
  */
 function CanvasImage(options){
-    if ( typeof options.img === 'undefined' || options.img.src === 'undefined' ) return;
+    if ( typeof options.img === 'undefined' || options.img.src === 'undefined' ) return false;
     var defaults = {
         "context" : document.getElementsByTagName('canvas')[0].getContext("2d"),
         "img" : null,
@@ -32,8 +32,8 @@ function CanvasImage(options){
         "x" : 0,
         "y" : 0,
         "z" : 0,
-        "width" : 0,
-        "height" : 0,
+        "width" : options.img.naturalWidth,
+        "height" : options.img.naturalHeight,
         "name" : null,
         "border" : null,
         "behaviour" : function(){}

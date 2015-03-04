@@ -12,6 +12,7 @@
  */
 var spriteSelection = function(context,properties){
     function setProperties(el){
+        if (!properties) return;
         if ( typeof el === 'undefined' )
         {
             for (var i = 0;i<properties.length;i++)
